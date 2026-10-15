@@ -6,7 +6,7 @@
 <style>
   @page {
     size: A4 portrait;
-    margin: 12mm 15mm 12mm 15mm;
+    margin: 10mm 13mm 10mm 13mm;
   }
 
   * {
@@ -21,30 +21,30 @@
     background: #FFFFFF;
     margin: 0;
     padding: 0;
-    font-size: 9.3pt;
-    line-height: 1.45;
+    font-size: 8.8pt;
+    line-height: 1.40;
   }
 
   /* Header Section */
   .doc-header {
     border-bottom: 2.5px solid #0F172A;
-    padding-bottom: 6px;
-    margin-bottom: 12px;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
   }
   .doc-title-group h1 {
-    font-size: 14pt;
+    font-size: 13.5pt;
     font-weight: 800;
     letter-spacing: -0.02em;
-    margin: 0 0 2px 0;
+    margin: 0 0 1px 0;
     color: #0F172A;
     text-transform: uppercase;
   }
   .doc-title-group .subtitle {
-    font-size: 8.5pt;
-    font-weight: 600;
+    font-size: 8pt;
+    font-weight: 700;
     color: #2563EB;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -53,8 +53,8 @@
     background: #F1F5F9;
     border: 1px solid #CBD5E1;
     border-radius: 4px;
-    padding: 3px 8px;
-    font-size: 7.8pt;
+    padding: 2.5px 7px;
+    font-size: 7.5pt;
     font-family: 'Consolas', monospace;
     font-weight: 600;
     color: #334155;
@@ -64,89 +64,110 @@
   .section-title {
     background: #0F172A;
     color: #FFFFFF;
-    font-size: 8.8pt;
+    font-size: 8.5pt;
     font-weight: 700;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    padding: 4px 8px;
+    padding: 3px 7px;
     border-radius: 3px;
-    margin-top: 10px;
-    margin-bottom: 8px;
+    margin-top: 7px;
+    margin-bottom: 6px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
   }
   .section-title .num {
     background: #2563EB;
     color: #FFFFFF;
-    padding: 1px 6px;
+    padding: 1px 5px;
     border-radius: 2px;
-    font-size: 8pt;
-  }
-
-  /* Cards & Containers */
-  .card {
-    border: 1px solid #CBD5E1;
-    border-radius: 4px;
-    background: #FFFFFF;
-    padding: 8px 10px;
-    margin-bottom: 8px;
-  }
-  .card-header {
-    font-size: 8.6pt;
-    font-weight: 700;
-    color: #0F172A;
-    margin-bottom: 6px;
-    border-bottom: 1px solid #E2E8F0;
-    padding-bottom: 3px;
-    display: flex;
-    justify-content: space-between;
+    font-size: 7.5pt;
   }
 
   /* Trade-off Grid */
   .grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 10px;
+    gap: 8px;
+    margin-bottom: 7px;
   }
   .tradeoff-box {
     border: 1px solid #E2E8F0;
     border-radius: 4px;
-    padding: 8px 10px;
+    padding: 6px 8px;
     background: #F8FAFC;
   }
-  .tradeoff-box.bad {
-    border-left: 4px solid #64748B;
-  }
-  .tradeoff-box.good {
-    border-left: 4px solid #2563EB;
-  }
+  .tradeoff-box.bad { border-left: 3.5px solid #64748B; }
+  .tradeoff-box.good { border-left: 3.5px solid #2563EB; }
   .tradeoff-title {
-    font-size: 8.2pt;
+    font-size: 7.8pt;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.03em;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
   .tradeoff-title.bad { color: #475569; }
   .tradeoff-title.good { color: #2563EB; }
 
-  p {
-    margin: 0 0 5px 0;
-  }
-  p:last-child {
-    margin-bottom: 0;
-  }
+  p { margin: 0 0 3px 0; }
+  p:last-child { margin-bottom: 0; }
 
-  /* SVG Container */
-  .svg-box {
-    background: #FAFAFA;
+  /* Authentic Visual Art Containers */
+  .art-figure {
     border: 1px solid #CBD5E1;
-    border-radius: 4px;
-    padding: 8px 6px;
-    margin-bottom: 10px;
+    border-radius: 5px;
+    background: #FAFAFA;
+    padding: 6px 8px;
+    margin-bottom: 7px;
+    display: grid;
+    grid-template-columns: 52% 48%;
+    gap: 10px;
+    align-items: center;
+  }
+  .art-img-wrap {
     text-align: center;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 4px;
+    padding: 4px;
+  }
+  .art-img-wrap img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  .art-callouts {
+    padding-left: 2px;
+  }
+  .art-callouts .figure-tag {
+    font-size: 7.2pt;
+    font-weight: 800;
+    color: #2563EB;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 3px;
+    display: block;
+  }
+  .art-callouts .figure-title {
+    font-size: 8.6pt;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 4px;
+    line-height: 1.25;
+  }
+  .art-callouts ul {
+    margin: 0;
+    padding-left: 14px;
+    font-size: 8.2pt;
+    color: #334155;
+    line-height: 1.35;
+  }
+  .art-callouts li {
+    margin-bottom: 4px;
+  }
+  .art-callouts li:last-child {
+    margin-bottom: 0;
   }
 
   /* Template Quotes */
@@ -157,17 +178,17 @@
     border-right: 1px solid #E2E8F0;
     border-bottom: 1px solid #E2E8F0;
     border-radius: 0 4px 4px 0;
-    padding: 8px 11px;
-    margin-bottom: 8px;
-    font-size: 8.8pt;
+    padding: 6px 10px;
+    margin-bottom: 6px;
+    font-size: 8.5pt;
   }
   .template-label {
-    font-size: 8pt;
+    font-size: 7.6pt;
     font-weight: 700;
     color: #2563EB;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
   .highlight-term {
     font-weight: 700;
@@ -181,49 +202,41 @@
   table.matrix-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 8.4pt;
-    margin-bottom: 8px;
+    font-size: 8.2pt;
+    margin-bottom: 6px;
   }
   table.matrix-table th {
     background: #0F172A;
     color: #FFFFFF;
     font-weight: 600;
     text-align: left;
-    padding: 5px 8px;
-    font-size: 8pt;
+    padding: 4px 7px;
+    font-size: 7.7pt;
     border: 1px solid #0F172A;
   }
   table.matrix-table td {
-    padding: 5px 8px;
+    padding: 4px 7px;
     border: 1px solid #CBD5E1;
   }
-  table.matrix-table tr:nth-child(even) td {
-    background: #F8FAFC;
-  }
+  table.matrix-table tr:nth-child(even) td { background: #F8FAFC; }
   table.matrix-table td.mono {
     font-family: 'Consolas', monospace;
-    font-size: 8.3pt;
+    font-size: 8.1pt;
     font-weight: 600;
   }
-  table.matrix-table td.violation {
-    color: #DC2626;
-    font-weight: 700;
-  }
-  table.matrix-table td.valid {
-    color: #16A34A;
-    font-weight: 700;
-  }
+  table.matrix-table td.violation { color: #DC2626; font-weight: 700; }
+  table.matrix-table td.valid { color: #16A34A; font-weight: 700; }
 
   /* Trap Comparison Table */
   table.trap-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 8.4pt;
-    margin-bottom: 8px;
+    font-size: 8.2pt;
+    margin-bottom: 6px;
   }
   table.trap-table th {
-    padding: 5px 8px;
-    font-size: 8.1pt;
+    padding: 4px 7px;
+    font-size: 7.8pt;
     font-weight: 700;
     text-transform: uppercase;
     border: 1px solid #94A3B8;
@@ -241,44 +254,43 @@
     width: 56%;
   }
   table.trap-table td {
-    padding: 6px 8px;
+    padding: 5px 7px;
     border: 1px solid #CBD5E1;
     vertical-align: top;
   }
-  table.trap-table td.bad-cell {
-    background: #FFFBFB;
-    color: #7F1D1D;
-  }
-  table.trap-table td.good-cell {
-    background: #FBFDFB;
-    color: #064E3B;
-  }
+  table.trap-table td.bad-cell { background: #FFFBFB; color: #7F1D1D; }
+  table.trap-table td.good-cell { background: #FBFDFB; color: #064E3B; }
 
   /* Axiom tags */
   .axiom-badge {
     display: inline-block;
     background: #0F172A;
     color: #FFFFFF;
-    font-size: 7.2pt;
+    font-size: 7pt;
     font-weight: 700;
-    padding: 1px 5px;
+    padding: 1px 4px;
     border-radius: 2px;
-    margin-right: 4px;
+    margin-right: 3px;
+  }
+
+  .card {
+    border: 1px solid #CBD5E1;
+    border-radius: 4px;
+    padding: 6px 9px;
+    margin-bottom: 6px;
   }
 
   .page-footer {
     display: flex;
     justify-content: space-between;
-    font-size: 7.8pt;
+    font-size: 7.5pt;
     color: #64748B;
     border-top: 1px solid #E2E8F0;
-    padding-top: 6px;
-    margin-top: 12px;
+    padding-top: 4px;
+    margin-top: 6px;
   }
 
-  .page-break {
-    page-break-before: always;
-  }
+  .page-break { page-break-before: always; }
 </style>
 </head>
 <body>
@@ -286,7 +298,7 @@
 <!-- ================= PAGE 1 ================= -->
 <div class="doc-header">
   <div class="doc-title-group">
-    <div class="subtitle">COMP20003 Algorithms & Data Structures · Study Companion</div>
+    <div class="subtitle">COMP20003 Algorithms & Data Structures · DK Study Companion</div>
     <h1>Topic 4.2 · Binary Heap: Array Architecture & Sift-Up</h1>
   </div>
   <div class="header-badge">Core Syllabus: [4.1.2] [4.2.1] [4.2.4]</div>
@@ -300,188 +312,49 @@
   <div class="tradeoff-box bad">
     <div class="tradeoff-title bad">Memory Bottleneck: Explicit Pointer Trees</div>
     <p>Dynamic nodes store two 8-byte child pointers (<code>*left</code>, <code>*right</code>).</p>
-    <p>For <i>N</i> keys, 16<i>N</i> bytes are lost to overhead; scattered heap allocation triggers continuous CPU cache misses.</p>
+    <p>For <i>N</i> keys, 16<i>N</i> bytes are wasted; non-contiguous allocations cause continuous CPU cache misses.</p>
   </div>
   <div class="tradeoff-box good">
     <div class="tradeoff-title good">The DK Breakthrough: Contiguous Complete Tree</div>
     <p>Enforcing a <b>Complete Binary Tree</b> shape eliminates all pointer overhead.</p>
-    <p>Relationships map purely to <b>integer arithmetic</b> inside a contiguous array with maximum cache locality.</p>
+    <p>Parent-child links map purely to <b>integer arithmetic</b> inside an array with optimal cache locality.</p>
   </div>
 </div>
 
-<!-- SVG Diagram: Logical vs Physical Array Wireframe with Callout Lines -->
-<div class="svg-box">
-  <svg width="680" height="155" viewBox="0 0 680 155" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Segoe UI', sans-serif;">
-    <defs>
-      <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563EB" />
-      </marker>
-    </defs>
-
-    <!-- Background Framing Left -->
-    <rect x="5" y="5" width="280" height="145" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
-    <text x="145" y="22" font-size="9" font-weight="700" fill="#0F172A" text-anchor="middle">LOGICAL COMPLETE TREE (N=6)</text>
-
-    <!-- Tree Edges -->
-    <line x1="145" y1="45" x2="85" y2="76" stroke="#64748B" stroke-width="1.5"/>
-    <line x1="145" y1="45" x2="205" y2="76" stroke="#64748B" stroke-width="1.5"/>
-    <line x1="85" y1="92" x2="55" y2="120" stroke="#64748B" stroke-width="1.5"/>
-    <line x1="85" y1="92" x2="115" y2="120" stroke="#64748B" stroke-width="1.5"/>
-    <line x1="205" y1="92" x2="175" y2="120" stroke="#64748B" stroke-width="1.5"/>
-
-    <!-- Tree Nodes -->
-    <!-- Root (1) -->
-    <circle cx="145" cy="45" r="14" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
-    <text x="145" y="49" font-size="10" font-weight="700" fill="#1E40AF" text-anchor="middle">90</text>
-    <text x="145" y="29" font-size="7.5" font-weight="600" fill="#2563EB" text-anchor="middle">i=1 (Root)</text>
-
-    <!-- Level 1 (2, 3) -->
-    <circle cx="85" cy="84" r="13" fill="#F8FAFC" stroke="#0F172A" stroke-width="1.5"/>
-    <text x="85" y="88" font-size="9.5" font-weight="700" fill="#0F172A" text-anchor="middle">75</text>
-    <text x="58" y="87" font-size="7.5" font-weight="600" fill="#64748B" text-anchor="middle">i=2</text>
-
-    <circle cx="205" cy="84" r="13" fill="#F8FAFC" stroke="#0F172A" stroke-width="1.5"/>
-    <text x="205" y="88" font-size="9.5" font-weight="700" fill="#0F172A" text-anchor="middle">60</text>
-    <text x="232" y="87" font-size="7.5" font-weight="600" fill="#64748B" text-anchor="middle">i=3</text>
-
-    <!-- Level 2 (4, 5, 6) -->
-    <circle cx="55" cy="128" r="12" fill="#F8FAFC" stroke="#0F172A" stroke-width="1.2"/>
-    <text x="55" y="132" font-size="9" font-weight="600" fill="#0F172A" text-anchor="middle">40</text>
-    <text x="33" y="131" font-size="7.2" fill="#64748B" text-anchor="middle">i=4</text>
-
-    <circle cx="115" cy="128" r="12" fill="#F8FAFC" stroke="#0F172A" stroke-width="1.2"/>
-    <text x="115" y="132" font-size="9" font-weight="600" fill="#0F172A" text-anchor="middle">55</text>
-    <text x="137" y="131" font-size="7.2" fill="#64748B" text-anchor="middle">i=5</text>
-
-    <circle cx="175" cy="128" r="12" fill="#F8FAFC" stroke="#0F172A" stroke-width="1.2"/>
-    <text x="175" y="132" font-size="9" font-weight="600" fill="#0F172A" text-anchor="middle">20</text>
-    <text x="197" y="131" font-size="7.2" fill="#64748B" text-anchor="middle">i=6</text>
-
-    <!-- Right Box: Physical Array Wireframe -->
-    <rect x="305" y="5" width="370" height="145" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
-    <text x="490" y="22" font-size="9" font-weight="700" fill="#0F172A" text-anchor="middle">PHYSICAL CONTIGUOUS MEMORY (1-BASED ARRAY)</text>
-
-    <!-- Array Slots -->
-    <!-- Slot 0 -->
-    <g transform="translate(320, 42)">
-      <rect x="0" y="0" width="42" height="34" fill="#E2E8F0" stroke="#94A3B8" stroke-dasharray="2,2"/>
-      <text x="21" y="21" font-size="10" font-weight="700" fill="#64748B" text-anchor="middle">-</text>
-      <text x="21" y="-5" font-size="7.5" font-weight="600" fill="#64748B" text-anchor="middle">[0]</text>
-      <text x="21" y="45" font-size="6.5" fill="#64748B" text-anchor="middle">Unused</text>
-    </g>
-
-    <!-- Slot 1 (Root: 90) -->
-    <g transform="translate(366, 42)">
-      <rect x="0" y="0" width="44" height="34" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
-      <text x="22" y="22" font-size="11" font-weight="800" fill="#1E40AF" text-anchor="middle">90</text>
-      <text x="22" y="-5" font-size="8" font-weight="700" fill="#2563EB" text-anchor="middle">[1]</text>
-      <text x="22" y="45" font-size="7" font-weight="600" fill="#2563EB" text-anchor="middle">Root</text>
-    </g>
-
-    <!-- Slot 2 (75) -->
-    <g transform="translate(414, 42)">
-      <rect x="0" y="0" width="44" height="34" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.5"/>
-      <text x="22" y="22" font-size="11" font-weight="700" fill="#0F172A" text-anchor="middle">75</text>
-      <text x="22" y="-5" font-size="8" font-weight="600" fill="#0F172A" text-anchor="middle">[2]</text>
-      <text x="22" y="45" font-size="7" fill="#64748B" text-anchor="middle">Left(1)</text>
-    </g>
-
-    <!-- Slot 3 (60) -->
-    <g transform="translate(462, 42)">
-      <rect x="0" y="0" width="44" height="34" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.5"/>
-      <text x="22" y="22" font-size="11" font-weight="700" fill="#0F172A" text-anchor="middle">60</text>
-      <text x="22" y="-5" font-size="8" font-weight="600" fill="#0F172A" text-anchor="middle">[3]</text>
-      <text x="22" y="45" font-size="7" fill="#64748B" text-anchor="middle">Right(1)</text>
-    </g>
-
-    <!-- Slot 4 (40) -->
-    <g transform="translate(510, 42)">
-      <rect x="0" y="0" width="44" height="34" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.5"/>
-      <text x="22" y="22" font-size="11" font-weight="700" fill="#0F172A" text-anchor="middle">40</text>
-      <text x="22" y="-5" font-size="8" font-weight="600" fill="#0F172A" text-anchor="middle">[4]</text>
-      <text x="22" y="45" font-size="7" fill="#64748B" text-anchor="middle">Left(2)</text>
-    </g>
-
-    <!-- Slot 5 (55) -->
-    <g transform="translate(558, 42)">
-      <rect x="0" y="0" width="44" height="34" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.5"/>
-      <text x="22" y="22" font-size="11" font-weight="700" fill="#0F172A" text-anchor="middle">55</text>
-      <text x="22" y="-5" font-size="8" font-weight="600" fill="#0F172A" text-anchor="middle">[5]</text>
-      <text x="22" y="45" font-size="7" fill="#64748B" text-anchor="middle">Right(2)</text>
-    </g>
-
-    <!-- Slot 6 (20) -->
-    <g transform="translate(606, 42)">
-      <rect x="0" y="0" width="44" height="34" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.5"/>
-      <text x="22" y="22" font-size="11" font-weight="700" fill="#0F172A" text-anchor="middle">20</text>
-      <text x="22" y="-5" font-size="8" font-weight="600" fill="#0F172A" text-anchor="middle">[6]</text>
-      <text x="22" y="45" font-size="7" fill="#64748B" text-anchor="middle">Left(3)</text>
-    </g>
-
-    <!-- Leader Line & Arithmetic Callout -->
-    <path d="M 484 94 C 484 128, 400 128, 388 98" fill="none" stroke="#2563EB" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#arrow)"/>
-    <rect x="408" y="108" width="130" height="22" rx="3" fill="#EFF6FF" stroke="#93C5FD"/>
-    <text x="473" y="123" font-size="8" font-weight="700" fill="#1E40AF" text-anchor="middle">Parent = floor(3 / 2) = 1</text>
-  </svg>
+<!-- Authentic Illustration 1: Representation of Heap -->
+<div class="art-figure">
+  <div class="art-img-wrap">
+    <img src="./assets/images/04_binary_heap_representation.png" alt="Binary Heap Representation"/>
+  </div>
+  <div class="art-callouts">
+    <span class="figure-tag">Figure 4.2.1 · Spatial Architecture</span>
+    <div class="figure-title">Complete Binary Tree to Array Index Mapping</div>
+    <ul>
+      <li><b>Logical Completeness</b>: Tree levels are packed strictly left-to-right without internal gaps, guaranteeing contiguous array indices 0 to <i>N</i> - 1.</li>
+      <li><b>Zero-Pointer Arithmetic</b>: Given current node <i>i</i>, the parent index is &lfloor;(<i>i</i> - 1) / 2&rfloor;, while left child is 2<i>i</i> + 1 and right child is 2<i>i</i> + 2.</li>
+      <li><b>Examiner Criterion</b>: Look at the curved grey leader lines connecting indices—random access eliminates <i>O</i>(<i>N</i>) list traversals.</li>
+    </ul>
+  </div>
 </div>
 
-<!-- Cutaway Exploded Transition: Up-Heap (Insert 85) -->
-<div class="card">
-  <div class="card-header">
-    <span>CUTAWAY EXPLODED VIEW: Up-Heap State Machine (Insert Key = 85 into Max-Heap)</span>
-    <span style="font-family: Consolas; font-size: 7.8pt; color: #2563EB;">Time: O(log N) · Max Swaps: floor(log2 N)</span>
+<!-- Authentic Illustration 2: Up-Heap (Push) Step -->
+<div class="art-figure">
+  <div class="art-img-wrap">
+    <img src="./assets/images/04_heap_push_upheap.png" alt="Heap Push Up-Heap Step"/>
   </div>
-
-  <div style="text-align: center; padding: 6px 0;">
-    <svg width="670" height="110" viewBox="0 0 670 110" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Segoe UI', sans-serif;">
-      <!-- STEP 1 Frame -->
-      <rect x="5" y="5" width="315" height="100" rx="3" fill="#FFFDFD" stroke="#EF4444" stroke-width="1"/>
-      <rect x="5" y="5" width="75" height="18" rx="2" fill="#EF4444"/>
-      <text x="42" y="17" font-size="7.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">STEP 1: APPEND</text>
-
-      <!-- Slot Array Step 1 -->
-      <g transform="translate(18, 35)">
-        <rect x="0" y="0" width="32" height="25" fill="#EFF6FF" stroke="#2563EB"/><text x="16" y="16" font-size="9" font-weight="700" fill="#1E40AF" text-anchor="middle">90</text><text x="16" y="-3" font-size="7" fill="#64748B" text-anchor="middle">1</text>
-        <rect x="36" y="0" width="32" height="25" fill="#FFFFFF" stroke="#0F172A"/><text x="52" y="16" font-size="9" font-weight="600" fill="#0F172A" text-anchor="middle">75</text><text x="52" y="-3" font-size="7" fill="#64748B" text-anchor="middle">2</text>
-        <rect x="72" y="0" width="32" height="25" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/><text x="88" y="16" font-size="9" font-weight="700" fill="#DC2626" text-anchor="middle">60</text><text x="88" y="-3" font-size="7" font-weight="700" fill="#DC2626" text-anchor="middle">3 (P)</text>
-        <rect x="108" y="0" width="32" height="25" fill="#FFFFFF" stroke="#0F172A"/><text x="124" y="16" font-size="9" font-weight="600" fill="#0F172A" text-anchor="middle">40</text><text x="124" y="-3" font-size="7" fill="#64748B" text-anchor="middle">4</text>
-        <rect x="144" y="0" width="32" height="25" fill="#FFFFFF" stroke="#0F172A"/><text x="160" y="16" font-size="9" font-weight="600" fill="#0F172A" text-anchor="middle">55</text><text x="160" y="-3" font-size="7" fill="#64748B" text-anchor="middle">5</text>
-        <rect x="180" y="0" width="32" height="25" fill="#FFFFFF" stroke="#0F172A"/><text x="196" y="16" font-size="9" font-weight="600" fill="#0F172A" text-anchor="middle">20</text><text x="196" y="-3" font-size="7" fill="#64748B" text-anchor="middle">6</text>
-        <rect x="216" y="0" width="32" height="25" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/><text x="232" y="16" font-size="9.5" font-weight="800" fill="#DC2626" text-anchor="middle">85</text><text x="232" y="-3" font-size="7" font-weight="700" fill="#DC2626" text-anchor="middle">7 (New)</text>
-      </g>
-      <!-- Comparison Annotation -->
-      <path d="M 250 64 C 250 85, 106 85, 106 64" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arrow)"/>
-      <text x="175" y="82" font-size="7.8" font-weight="700" fill="#DC2626" text-anchor="middle">Key(7)=85 &gt; Key(3)=60 (VIOLATION)</text>
-      <text x="175" y="96" font-size="7.2" fill="#64748B" text-anchor="middle">Swap A[7] with parent A[floor(7/2)] = A[3]</text>
-
-      <!-- Transition Arrow between steps -->
-      <line x1="324" y1="55" x2="344" y2="55" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow)"/>
-
-      <!-- STEP 2 Frame -->
-      <rect x="348" y="5" width="315" height="100" rx="3" fill="#F0FDF4" stroke="#16A34A" stroke-width="1"/>
-      <rect x="348" y="5" width="70" height="18" rx="2" fill="#16A34A"/>
-      <text x="383" y="17" font-size="7.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">STEP 2: VALID</text>
-
-      <!-- Slot Array Step 2 -->
-      <g transform="translate(362, 35)">
-        <rect x="0" y="0" width="32" height="25" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/><text x="16" y="16" font-size="9" font-weight="700" fill="#1E40AF" text-anchor="middle">90</text><text x="16" y="-3" font-size="7" font-weight="700" fill="#2563EB" text-anchor="middle">1 (P)</text>
-        <rect x="36" y="0" width="32" height="25" fill="#FFFFFF" stroke="#0F172A"/><text x="52" y="16" font-size="9" font-weight="600" fill="#0F172A" text-anchor="middle">75</text><text x="52" y="-3" font-size="7" fill="#64748B" text-anchor="middle">2</text>
-        <rect x="72" y="0" width="32" height="25" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/><text x="88" y="16" font-size="9.5" font-weight="800" fill="#1E40AF" text-anchor="middle">85</text><text x="88" y="-3" font-size="7" font-weight="700" fill="#2563EB" text-anchor="middle">3 (i)</text>
-        <rect x="108" y="0" width="32" height="25" fill="#FFFFFF" stroke="#0F172A"/><text x="124" y="16" font-size="9" font-weight="600" fill="#0F172A" text-anchor="middle">40</text><text x="124" y="-3" font-size="7" fill="#64748B" text-anchor="middle">4</text>
-        <rect x="144" y="0" width="32" height="25" fill="#FFFFFF" stroke="#0F172A"/><text x="160" y="16" font-size="9" font-weight="600" fill="#0F172A" text-anchor="middle">55</text><text x="160" y="-3" font-size="7" fill="#64748B" text-anchor="middle">5</text>
-        <rect x="180" y="0" width="32" height="25" fill="#FFFFFF" stroke="#0F172A"/><text x="196" y="16" font-size="9" font-weight="600" fill="#0F172A" text-anchor="middle">20</text><text x="196" y="-3" font-size="7" fill="#64748B" text-anchor="middle">6</text>
-        <rect x="216" y="0" width="32" height="25" fill="#F8FAFC" stroke="#94A3B8"/><text x="232" y="16" font-size="9" font-weight="600" fill="#64748B" text-anchor="middle">60</text><text x="232" y="-3" font-size="7" fill="#64748B" text-anchor="middle">7</text>
-      </g>
-      <!-- Comparison Annotation Step 2 -->
-      <path d="M 450 64 C 450 85, 378 85, 378 64" fill="none" stroke="#16A34A" stroke-width="1.5" marker-end="url(#arrow)"/>
-      <text x="515" y="82" font-size="7.8" font-weight="700" fill="#16A34A" text-anchor="middle">Key(3)=85 &le; Key(1)=90 (SATISFIED)</text>
-      <text x="515" y="96" font-size="7.2" fill="#64748B" text-anchor="middle">Heap-Order Invariant restored. HALT execution.</text>
-    </svg>
+  <div class="art-callouts">
+    <span class="figure-tag">Figure 4.2.2 · Dynamic State Machine</span>
+    <div class="figure-title">Up-Heap (Sift-Up) Execution along Ancestor Path</div>
+    <ul>
+      <li><b>Tail Placement</b>: New key 7 is first placed at the heap boundary (index 11), preserving the structural shape invariant.</li>
+      <li><b>Ancestor Tube Isolation</b>: Notice the shaded grey tube—only direct ancestors on the root path are compared. Unrelated subtrees remain untouched.</li>
+      <li><b>Local Invariant Restoration</b>: Key 7 &gt; Parent 6 violates Max-Heap order; swapping them propagates the key upward in strictly <i>O</i>(log <i>N</i>) time.</li>
+    </ul>
   </div>
 </div>
 
 <div class="page-footer">
-  <span>COMP20003 DK Study Companion</span>
+  <span>COMP20003 DK Study Companion · Krahets Authentic Diagram Integration</span>
   <span>Topic 4.2 · Page 1 of 2</span>
 </div>
 
@@ -490,7 +363,7 @@
 
 <div class="doc-header">
   <div class="doc-title-group">
-    <div class="subtitle">COMP20003 Algorithms & Data Structures · Study Companion</div>
+    <div class="subtitle">COMP20003 Algorithms & Data Structures · DK Study Companion</div>
     <h1>Topic 4.2 · Exam Combat, Trace Protocol & Traps</h1>
   </div>
   <div class="header-badge">Combat Anatomy: [02] [03] [04]</div>
@@ -501,25 +374,24 @@
 
 <div class="template-box">
   <div class="template-label">Template 1 · Invariant Preservation Causal Chain (Insert / Up-Heap)</div>
-  <p>Inserting element <i>X</i> appends it to index <i>N</i> + 1, strictly preserving the <span class="highlight-term">Structural Completeness Invariant</span>.</p>
-  <p>Because <i>X</i> may exceed its parent at index &lfloor;<i>i</i> / 2&rfloor;, the <span class="highlight-term">Heap-Order Invariant</span> may be locally violated.</p>
-  <p>The algorithm iteratively swaps <i>X</i> with its parent along the <span class="highlight-term">ancestor path</span> until <i>A</i>[&lfloor;<i>i</i> / 2&rfloor;] &ge; <i>X</i> or the root (<i>i</i> = 1) is reached.</p>
+  <p>Inserting element <i>X</i> appends it to index <i>N</i>, strictly preserving the <span class="highlight-term">Structural Completeness Invariant</span>.</p>
+  <p>Because <i>X</i> may exceed its parent at index &lfloor;(<i>i</i> - 1) / 2&rfloor;, the <span class="highlight-term">Heap-Order Invariant</span> may be locally violated.</p>
+  <p>The algorithm iteratively swaps <i>X</i> with its parent along the <span class="highlight-term">ancestor path</span> until <i>A</i>[parent] &ge; <i>X</i> or root is reached.</p>
 </div>
 
 <div class="template-box">
   <div class="template-label">Template 2 · Logarithmic Time Complexity Justification</div>
-  <p>The maximum number of comparisons and swaps is bounded by the height of the complete binary tree.</p>
-  <p>A complete binary tree with <i>N</i> elements has height strictly <i>h</i> = &lfloor;log<sub>2</sub> <i>N</i>&rfloor;.</p>
+  <p>The maximum number of comparisons and swaps is bounded by tree height <i>h</i> = &lfloor;log<sub>2</sub> <i>N</i>&rfloor;.</p>
   <p>Because each ancestor level performs exactly one comparison, insertion executes in strictly <span class="highlight-term">O(log N) worst-case time</span>.</p>
 </div>
 
 <!-- [03] STATE MATRIX / TRACE PROTOCOL -->
 <div class="section-title"><span class="num">03</span> Mechanics of the State Matrix / Trace Protocol</div>
 
-<p style="font-size: 8.3pt; color: #475569; margin-bottom: 6px;">
-  <span class="axiom-badge">AXIOM 1</span> <b>1-Based Indexing</b>: Array[0] is a blank sentinel cell. Never place the root at index 0.
+<p style="font-size: 8pt; color: #475569; margin-bottom: 5px;">
+  <span class="axiom-badge">AXIOM 1</span> <b>0-Based vs 1-Based</b>: Always verify whether the exam defines index 0 or index 1 as root.
   &nbsp;|&nbsp;
-  <span class="axiom-badge">AXIOM 2</span> <b>Single Comparison</b>: Up-heap compares ONLY with parent (1 compare/level), unlike down-heap (2 compares/level).
+  <span class="axiom-badge">AXIOM 2</span> <b>Single Comparison</b>: Up-heap compares ONLY against parent (1 test/level); down-heap requires 2 tests/level.
 </p>
 
 <table class="matrix-table">
@@ -527,9 +399,9 @@
     <tr>
       <th style="width: 8%;">Step</th>
       <th style="width: 14%;">Active Index <i>i</i></th>
-      <th style="width: 18%;">Parent &lfloor;<i>i</i> / 2&rfloor;</th>
-      <th style="width: 14%;">Val at <i>i</i></th>
-      <th style="width: 14%;">Val at Parent</th>
+      <th style="width: 20%;">Parent &lfloor;(<i>i</i>-1)/2&rfloor;</th>
+      <th style="width: 13%;">Val at <i>i</i></th>
+      <th style="width: 13%;">Val at Parent</th>
       <th style="width: 18%;">Invariant Check</th>
       <th style="width: 14%;">State Transition</th>
     </tr>
@@ -537,20 +409,20 @@
   <tbody>
     <tr>
       <td class="mono">0</td>
-      <td class="mono">7 (Tail)</td>
-      <td class="mono">floor(7/2) = 3</td>
-      <td class="mono">85</td>
-      <td class="mono">60</td>
-      <td class="violation">85 &gt; 60 (Violation)</td>
-      <td>Swap A[7] &harr; A[3]; <i>i</i> &larr; 3</td>
+      <td class="mono">11 (Tail)</td>
+      <td class="mono">floor(10/2) = 5</td>
+      <td class="mono">7</td>
+      <td class="mono">6</td>
+      <td class="violation">7 &gt; 6 (Violation)</td>
+      <td>Swap A[11] &harr; A[5]; <i>i</i> &larr; 5</td>
     </tr>
     <tr>
       <td class="mono">1</td>
-      <td class="mono">3</td>
-      <td class="mono">floor(3/2) = 1</td>
-      <td class="mono">85</td>
-      <td class="mono">90</td>
-      <td class="valid">85 &le; 90 (Satisfied)</td>
+      <td class="mono">5</td>
+      <td class="mono">floor(4/2) = 2</td>
+      <td class="mono">7</td>
+      <td class="mono">7</td>
+      <td class="valid">7 &le; 7 (Satisfied)</td>
       <td><b>Halt</b> (Restored)</td>
     </tr>
   </tbody>
@@ -571,18 +443,18 @@
       <td class="bad-cell">
         <b>Q: Why is an array preferred over a linked list for binary heaps?</b><br/>
         <i>"Arrays are faster and easier to implement in C."</i><br/>
-        <span style="font-size: 7.5pt; color: #991B1B;">[Examiner note: 0 Marks. Lacks mechanical cause: fails to mention random-access index calculation vs linear traversal.]</span>
+        <span style="font-size: 7.3pt; color: #991B1B;">[Examiner note: 0 Marks. Lacks mechanical cause: fails to contrast O(1) index arithmetic against O(N) traversal.]</span>
       </td>
       <td class="good-cell">
         <b>Criterion Answer:</b><br/>
-        A complete binary tree mapped to an array computes parent and child addresses in <b>O(1) arithmetic time</b> (&lfloor;<i>i</i> / 2&rfloor;, 2<i>i</i>). A linked tree lacks random access, requiring <b>O(N) sequential traversal</b> to locate the insertion tail or parent, degrading insertion from <i>O</i>(log <i>N</i>) to <i>O</i>(<i>N</i>).
+        A complete binary tree in an array computes parent and child addresses in <b>O(1) arithmetic time</b> (&lfloor;(<i>i</i>-1)/2&rfloor;, 2<i>i</i>+1). A linked tree lacks random access, requiring <b>O(N) sequential traversal</b> to locate the insertion tail or parent, degrading insertion from <i>O</i>(log <i>N</i>) to <i>O</i>(<i>N</i>).
       </td>
     </tr>
     <tr>
       <td class="bad-cell">
         <b>Q: What is the maximum number of comparisons to insert into a heap of size N?</b><br/>
         <i>"Approximately log N comparisons."</i><br/>
-        <span style="font-size: 7.5pt; color: #991B1B;">[Examiner note: Inexact boundary. Does not credit full floor formula.]</span>
+        <span style="font-size: 7.3pt; color: #991B1B;">[Examiner note: Inexact boundary. Does not credit full floor formula.]</span>
       </td>
       <td class="good-cell">
         <b>Criterion Answer:</b><br/>
@@ -592,17 +464,17 @@
   </tbody>
 </table>
 
-<div class="card" style="border-left: 4px solid #DC2626; background: #FFFDFD; margin-top: 6px;">
-  <div style="font-weight: 700; color: #DC2626; font-size: 8.3pt; margin-bottom: 3px;">⚠️ CRITICAL EXAM PITFALL: 0-BASED VS 1-BASED INDEX SHIFT</div>
-  <p style="font-size: 8.2pt; margin: 0; color: #7F1D1D;">
-    If an exam question forces the root at <b>Index 0</b>, <b>NEVER</b> use <i>i</i> / 2 or 2<i>i</i>! The formulas shift to:
-    <b>Parent = &lfloor;(<i>i</i> - 1) / 2&rfloor;</b>, <b>Left = 2<i>i</i> + 1</b>, <b>Right = 2<i>i</i> + 2</b>.
-    Using 1-based formulas on a 0-based array causes silent off-by-one corruption in tracing questions.
+<div class="card" style="border-left: 3.5px solid #DC2626; background: #FFFDFD; margin-top: 5px;">
+  <div style="font-weight: 700; color: #DC2626; font-size: 8pt; margin-bottom: 2px;">⚠️ CRITICAL EXAM PITFALL: 0-BASED VS 1-BASED INDEX SHIFT</div>
+  <p style="font-size: 7.9pt; margin: 0; color: #7F1D1D;">
+    Check the root index immediately! In <b>0-based arrays</b> (Figure 4.2.1 above), Parent = &lfloor;(<i>i</i> - 1) / 2&rfloor;.
+    In <b>1-based arrays</b>, Parent = &lfloor;<i>i</i> / 2&rfloor;.
+    Mixing up the two formulas is the #1 reason students lose 100% of tracing marks in COMP20003 exams.
   </p>
 </div>
 
 <div class="page-footer">
-  <span>COMP20003 DK Study Companion</span>
+  <span>COMP20003 DK Study Companion · Krahets Authentic Diagram Integration</span>
   <span>Topic 4.2 · Page 2 of 2</span>
 </div>
 
