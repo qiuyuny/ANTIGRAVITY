@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>COMP20003 DK Study Companion - Topic 4.2</title>
+<title>DK Study Companion - An Array in Disguise</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,700;0,900;1,300&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+
   @page {
     size: A4 portrait;
-    margin: 10mm 13mm 10mm 13mm;
+    margin: 10mm 12mm 10mm 12mm;
   }
 
   * {
@@ -16,466 +18,615 @@
   }
 
   body {
-    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-    color: #0F172A;
+    font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
+    color: #1E293B;
     background: #FFFFFF;
     margin: 0;
     padding: 0;
     font-size: 8.8pt;
-    line-height: 1.40;
+    line-height: 1.45;
   }
 
-  /* Header Section */
-  .doc-header {
-    border-bottom: 2.5px solid #0F172A;
-    padding-bottom: 4px;
-    margin-bottom: 8px;
+  /* Top Running Header */
+  .running-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+    border-bottom: 2px solid #0F172A;
+    padding-bottom: 4px;
+    margin-bottom: 10px;
   }
-  .doc-title-group h1 {
-    font-size: 13.5pt;
+  .running-header .series-tag {
+    font-size: 7.2pt;
     font-weight: 800;
-    letter-spacing: -0.02em;
-    margin: 0 0 1px 0;
-    color: #0F172A;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
+    color: #64748B;
   }
-  .doc-title-group .subtitle {
-    font-size: 8pt;
-    font-weight: 700;
-    color: #2563EB;
-    letter-spacing: 0.04em;
+  .running-header .chapter-tag {
+    background: #0284C7;
+    color: #FFFFFF;
+    font-size: 7.2pt;
+    font-weight: 800;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-  }
-  .header-badge {
-    background: #F1F5F9;
-    border: 1px solid #CBD5E1;
-    border-radius: 4px;
-    padding: 2.5px 7px;
-    font-size: 7.5pt;
-    font-family: 'Consolas', monospace;
-    font-weight: 600;
-    color: #334155;
+    padding: 2px 7px;
+    border-radius: 20px;
   }
 
-  /* Section Headings */
-  .section-title {
-    background: #0F172A;
-    color: #FFFFFF;
-    font-size: 8.5pt;
-    font-weight: 700;
-    letter-spacing: 0.05em;
+  /* Title Block */
+  .title-hero {
+    margin-bottom: 10px;
+  }
+  .title-hero h1 {
+    font-family: 'Merriweather', Georgia, serif;
+    font-size: 20pt;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: #0F172A;
+    margin: 0 0 3px 0;
+    line-height: 1.15;
+  }
+  .title-hero .subtitle {
+    font-size: 9.5pt;
+    font-weight: 600;
+    color: #0284C7;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  /* Top 2-Column Split: In Context Sidebar + Big Pull Quote */
+  .hero-meta-grid {
+    display: grid;
+    grid-template-columns: 42% 58%;
+    gap: 12px;
+    margin-bottom: 11px;
+    align-items: stretch;
+  }
+
+  /* DK "IN CONTEXT" Box */
+  .in-context-card {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-top: 3px solid #0F172A;
+    border-radius: 4px;
+    padding: 7px 9px;
+  }
+  .in-context-header {
+    font-size: 7.2pt;
+    font-weight: 800;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    padding: 3px 7px;
-    border-radius: 3px;
-    margin-top: 7px;
-    margin-bottom: 6px;
+    color: #0F172A;
+    margin-bottom: 5px;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
   }
-  .section-title .num {
-    background: #2563EB;
-    color: #FFFFFF;
-    padding: 1px 5px;
-    border-radius: 2px;
-    font-size: 7.5pt;
+  .in-context-row {
+    margin-bottom: 4px;
+    font-size: 7.8pt;
+    line-height: 1.35;
+  }
+  .in-context-row:last-child { margin-bottom: 0; }
+  .in-context-row b {
+    color: #0369A1;
+    text-transform: uppercase;
+    font-size: 7pt;
+    letter-spacing: 0.05em;
+    display: block;
   }
 
-  /* Trade-off Grid */
-  .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 7px;
+  /* DK Big Pull Quote */
+  .pull-quote-card {
+    background: #EFF6FF;
+    border-radius: 6px;
+    padding: 8px 12px 8px 14px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 4px solid #0284C7;
   }
-  .tradeoff-box {
-    border: 1px solid #E2E8F0;
-    border-radius: 4px;
-    padding: 6px 8px;
-    background: #F8FAFC;
+  .pull-quote-mark {
+    font-family: 'Merriweather', Georgia, serif;
+    font-size: 32pt;
+    line-height: 1;
+    color: #93C5FD;
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    opacity: 0.6;
+    pointer-events: none;
   }
-  .tradeoff-box.bad { border-left: 3.5px solid #64748B; }
-  .tradeoff-box.good { border-left: 3.5px solid #2563EB; }
-  .tradeoff-title {
-    font-size: 7.8pt;
+  .pull-quote-text {
+    font-family: 'Merriweather', Georgia, serif;
+    font-style: italic;
+    font-size: 8.8pt;
+    color: #1E3A8A;
+    line-height: 1.42;
+    position: relative;
+    z-index: 1;
+    margin-left: 10px;
+  }
+  .pull-quote-author {
+    font-size: 7.2pt;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
-    margin-bottom: 2px;
+    letter-spacing: 0.06em;
+    color: #2563EB;
+    margin-top: 4px;
+    margin-left: 10px;
   }
-  .tradeoff-title.bad { color: #475569; }
-  .tradeoff-title.good { color: #2563EB; }
 
-  p { margin: 0 0 3px 0; }
-  p:last-child { margin-bottom: 0; }
-
-  /* Authentic Visual Art Containers */
-  .art-figure {
+  /* Main Hero Graphic Showcase (DK Style) */
+  .hero-graphic-card {
+    background: #FFFFFF;
     border: 1px solid #CBD5E1;
-    border-radius: 5px;
-    background: #FAFAFA;
-    padding: 6px 8px;
-    margin-bottom: 7px;
+    border-radius: 8px;
+    padding: 9px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+  }
+  .hero-graphic-badge {
+    display: inline-block;
+    background: #0F172A;
+    color: #FFFFFF;
+    font-size: 7.2pt;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-bottom: 6px;
+  }
+  .hero-graphic-grid {
     display: grid;
-    grid-template-columns: 52% 48%;
-    gap: 10px;
+    grid-template-columns: 56% 44%;
+    gap: 12px;
     align-items: center;
   }
-  .art-img-wrap {
-    text-align: center;
-    background: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    border-radius: 4px;
+  .hero-img-box {
+    background: #FAFAFA;
+    border: 1px solid #F1F5F9;
+    border-radius: 6px;
     padding: 4px;
+    text-align: center;
   }
-  .art-img-wrap img {
+  .hero-img-box img {
     max-width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
   }
-  .art-callouts {
-    padding-left: 2px;
-  }
-  .art-callouts .figure-tag {
-    font-size: 7.2pt;
-    font-weight: 800;
-    color: #2563EB;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 3px;
-    display: block;
-  }
-  .art-callouts .figure-title {
+
+  /* Numbered Look Closer Points */
+  .look-closer-title {
     font-size: 8.6pt;
-    font-weight: 700;
+    font-weight: 800;
     color: #0F172A;
-    margin-bottom: 4px;
-    line-height: 1.25;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
   }
-  .art-callouts ul {
-    margin: 0;
-    padding-left: 14px;
+  .step-point {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 7px;
+    align-items: flex-start;
+  }
+  .step-point:last-child { margin-bottom: 0; }
+  .step-num {
+    background: #0284C7;
+    color: #FFFFFF;
+    font-weight: 800;
+    font-size: 7.5pt;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-content {
     font-size: 8.2pt;
+    line-height: 1.36;
     color: #334155;
-    line-height: 1.35;
   }
-  .art-callouts li {
-    margin-bottom: 4px;
-  }
-  .art-callouts li:last-child {
-    margin-bottom: 0;
+  .step-content b {
+    color: #0F172A;
   }
 
-  /* Template Quotes */
-  .template-box {
-    background: #F8FAFC;
-    border-left: 3.5px solid #2563EB;
+  /* Footer */
+  .dk-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-top: 1px solid #E2E8F0;
-    border-right: 1px solid #E2E8F0;
-    border-bottom: 1px solid #E2E8F0;
-    border-radius: 0 4px 4px 0;
-    padding: 6px 10px;
-    margin-bottom: 6px;
-    font-size: 8.5pt;
+    padding-top: 5px;
+    margin-top: 6px;
+    font-size: 7.4pt;
+    color: #94A3B8;
   }
-  .template-label {
-    font-size: 7.6pt;
-    font-weight: 700;
-    color: #2563EB;
+  .dk-footer b { color: #475569; }
+
+  .page-break { page-break-before: always; }
+
+  /* Page 2 Specifics */
+  .infographic-banner {
+    background: #0F172A;
+    color: #FFFFFF;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 8.4pt;
+    font-weight: 800;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 2px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  .highlight-term {
+  .infographic-banner span.badge {
+    background: #0284C7;
+    color: #FFFFFF;
+    font-size: 7.2pt;
+    padding: 1px 6px;
+    border-radius: 2px;
+  }
+
+  /* Step-by-Step Up-Heap Exploded Card */
+  .step-diagram-card {
+    border: 1px solid #CBD5E1;
+    border-radius: 6px;
+    background: #FFFFFF;
+    padding: 8px 10px;
+    margin-bottom: 9px;
+  }
+  .step-diagram-grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 12px;
+    align-items: center;
+  }
+
+  /* Exam Combat Templates Box */
+  .combat-card {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    padding: 7px 10px;
+    margin-bottom: 8px;
+  }
+  .combat-header {
+    font-size: 8pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #0284C7;
+    margin-bottom: 4px;
+  }
+  .combat-template {
+    background: #FFFFFF;
+    border-left: 3px solid #0284C7;
+    border-radius: 0 4px 4px 0;
+    padding: 5px 9px;
+    margin-bottom: 5px;
+    font-size: 8.2pt;
+    line-height: 1.38;
+  }
+  .combat-template:last-child { margin-bottom: 0; }
+  .combat-template .pill {
+    background: #E0F2FE;
+    color: #0369A1;
     font-weight: 700;
-    color: #0F172A;
-    background: #E2E8F0;
     padding: 0 4px;
     border-radius: 2px;
   }
 
-  /* Trace Matrix Table */
-  table.matrix-table {
+  /* State Matrix Table */
+  table.dk-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 8.2pt;
-    margin-bottom: 6px;
+    font-size: 8pt;
+    margin-bottom: 8px;
   }
-  table.matrix-table th {
+  table.dk-table th {
     background: #0F172A;
     color: #FFFFFF;
-    font-weight: 600;
+    font-weight: 700;
     text-align: left;
     padding: 4px 7px;
-    font-size: 7.7pt;
-    border: 1px solid #0F172A;
+    font-size: 7.5pt;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
-  table.matrix-table td {
+  table.dk-table td {
     padding: 4px 7px;
-    border: 1px solid #CBD5E1;
+    border-bottom: 1px solid #E2E8F0;
   }
-  table.matrix-table tr:nth-child(even) td { background: #F8FAFC; }
-  table.matrix-table td.mono {
-    font-family: 'Consolas', monospace;
-    font-size: 8.1pt;
+  table.dk-table tr:nth-child(even) td { background: #F8FAFC; }
+  table.dk-table td.mono {
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 7.8pt;
     font-weight: 600;
   }
-  table.matrix-table td.violation { color: #DC2626; font-weight: 700; }
-  table.matrix-table td.valid { color: #16A34A; font-weight: 700; }
+  table.dk-table td.violation { color: #DC2626; font-weight: 700; }
+  table.dk-table td.valid { color: #16A34A; font-weight: 700; }
 
-  /* Trap Comparison Table */
-  table.trap-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 8.2pt;
-    margin-bottom: 6px;
+  /* Red/Green Examiner Contrast Grid */
+  .exam-contrast-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 8px;
   }
-  table.trap-table th {
-    padding: 4px 7px;
-    font-size: 7.8pt;
-    font-weight: 700;
-    text-transform: uppercase;
-    border: 1px solid #94A3B8;
+  .contrast-card {
+    border-radius: 5px;
+    padding: 7px 9px;
+    font-size: 8pt;
+    line-height: 1.36;
   }
-  table.trap-table th.bad {
-    background: #FEF2F2;
-    color: #991B1B;
-    border-bottom: 2.5px solid #EF4444;
-    width: 44%;
+  .contrast-card.fail {
+    background: #FFF5F5;
+    border: 1px solid #FECACA;
+    border-top: 3px solid #EF4444;
   }
-  table.trap-table th.good {
+  .contrast-card.pass {
     background: #F0FDF4;
-    color: #166534;
-    border-bottom: 2.5px solid #22C55E;
-    width: 56%;
+    border: 1px solid #BBF7D0;
+    border-top: 3px solid #22C55E;
   }
-  table.trap-table td {
-    padding: 5px 7px;
-    border: 1px solid #CBD5E1;
-    vertical-align: top;
-  }
-  table.trap-table td.bad-cell { background: #FFFBFB; color: #7F1D1D; }
-  table.trap-table td.good-cell { background: #FBFDFB; color: #064E3B; }
-
-  /* Axiom tags */
-  .axiom-badge {
-    display: inline-block;
-    background: #0F172A;
-    color: #FFFFFF;
-    font-size: 7pt;
-    font-weight: 700;
-    padding: 1px 4px;
-    border-radius: 2px;
-    margin-right: 3px;
-  }
-
-  .card {
-    border: 1px solid #CBD5E1;
-    border-radius: 4px;
-    padding: 6px 9px;
-    margin-bottom: 6px;
-  }
-
-  .page-footer {
-    display: flex;
-    justify-content: space-between;
+  .contrast-title {
     font-size: 7.5pt;
-    color: #64748B;
-    border-top: 1px solid #E2E8F0;
-    padding-top: 4px;
-    margin-top: 6px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 3px;
   }
+  .contrast-card.fail .contrast-title { color: #B91C1C; }
+  .contrast-card.pass .contrast-title { color: #15803D; }
 
-  .page-break { page-break-before: always; }
+  /* "DID YOU KNOW?" Fun Insight Box */
+  .did-you-know-card {
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
+    border-left: 4px solid #F59E0B;
+    border-radius: 5px;
+    padding: 6px 10px;
+    margin-bottom: 4px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .did-you-know-badge {
+    background: #F59E0B;
+    color: #FFFFFF;
+    font-weight: 800;
+    font-size: 7.2pt;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .did-you-know-text {
+    font-size: 7.8pt;
+    color: #92400E;
+    line-height: 1.35;
+  }
 </style>
 </head>
 <body>
 
 <!-- ================= PAGE 1 ================= -->
-<div class="doc-header">
-  <div class="doc-title-group">
-    <div class="subtitle">COMP20003 Algorithms & Data Structures · DK Study Companion</div>
-    <h1>Topic 4.2 · Binary Heap: Array Architecture & Sift-Up</h1>
-  </div>
-  <div class="header-badge">Core Syllabus: [4.1.2] [4.2.1] [4.2.4]</div>
+<div class="running-header">
+  <span class="series-tag">DK Study Companion · Algorithms & Data Structures</span>
+  <span class="chapter-tag">Topic 4.2 · Priority Queues</span>
 </div>
 
-<!-- [01] MECHANICAL INTUITION -->
-<div class="section-title"><span class="num">01</span> Mechanical Intuition & Visual Architecture</div>
-
-<!-- Physical Tradeoff Grid -->
-<div class="grid-2">
-  <div class="tradeoff-box bad">
-    <div class="tradeoff-title bad">Memory Bottleneck: Explicit Pointer Trees</div>
-    <p>Dynamic nodes store two 8-byte child pointers (<code>*left</code>, <code>*right</code>).</p>
-    <p>For <i>N</i> keys, 16<i>N</i> bytes are wasted; non-contiguous allocations cause continuous CPU cache misses.</p>
-  </div>
-  <div class="tradeoff-box good">
-    <div class="tradeoff-title good">The DK Breakthrough: Contiguous Complete Tree</div>
-    <p>Enforcing a <b>Complete Binary Tree</b> shape eliminates all pointer overhead.</p>
-    <p>Parent-child links map purely to <b>integer arithmetic</b> inside an array with optimal cache locality.</p>
-  </div>
+<div class="title-hero">
+  <h1>AN ARRAY IN DISGUISE</h1>
+  <div class="subtitle">How Binary Heaps trick contiguous computer memory into behaving like an ultra-fast tree</div>
 </div>
 
-<!-- Authentic Illustration 1: Representation of Heap -->
-<div class="art-figure">
-  <div class="art-img-wrap">
-    <img src="./assets/images/04_binary_heap_representation.png" alt="Binary Heap Representation"/>
+<!-- In Context + Big Quote Grid -->
+<div class="hero-meta-grid">
+  <!-- IN CONTEXT BOX -->
+  <div class="in-context-card">
+    <div class="in-context-header">⚡ IN CONTEXT: THE BIG IDEA</div>
+    <div class="in-context-row">
+      <b>The Problem</b>
+      Linked trees waste 16<i>N</i> bytes on pointers and destroy CPU cache performance.
+    </div>
+    <div class="in-context-row">
+      <b>The Breakthrough (1964)</b>
+      J.W.J. Williams invents the Binary Heap: packing a tree level-by-level turns pointers into pure integer arithmetic.
+    </div>
+    <div class="in-context-row">
+      <b>Modern Impact</b>
+      Powers Priority Queues, O(<i>N</i> log <i>N</i>) HeapSort, and Dijkstra's routing engine.
+    </div>
   </div>
-  <div class="art-callouts">
-    <span class="figure-tag">Figure 4.2.1 · Spatial Architecture</span>
-    <div class="figure-title">Complete Binary Tree to Array Index Mapping</div>
-    <ul>
-      <li><b>Logical Completeness</b>: Tree levels are packed strictly left-to-right without internal gaps, guaranteeing contiguous array indices 0 to <i>N</i> - 1.</li>
-      <li><b>Zero-Pointer Arithmetic</b>: Given current node <i>i</i>, the parent index is &lfloor;(<i>i</i> - 1) / 2&rfloor;, while left child is 2<i>i</i> + 1 and right child is 2<i>i</i> + 2.</li>
-      <li><b>Examiner Criterion</b>: Look at the curved grey leader lines connecting indices—random access eliminates <i>O</i>(<i>N</i>) list traversals.</li>
-    </ul>
-  </div>
-</div>
 
-<!-- Authentic Illustration 2: Up-Heap (Push) Step -->
-<div class="art-figure">
-  <div class="art-img-wrap">
-    <img src="./assets/images/04_heap_push_upheap.png" alt="Heap Push Up-Heap Step"/>
-  </div>
-  <div class="art-callouts">
-    <span class="figure-tag">Figure 4.2.2 · Dynamic State Machine</span>
-    <div class="figure-title">Up-Heap (Sift-Up) Execution along Ancestor Path</div>
-    <ul>
-      <li><b>Tail Placement</b>: New key 7 is first placed at the heap boundary (index 11), preserving the structural shape invariant.</li>
-      <li><b>Ancestor Tube Isolation</b>: Notice the shaded grey tube—only direct ancestors on the root path are compared. Unrelated subtrees remain untouched.</li>
-      <li><b>Local Invariant Restoration</b>: Key 7 &gt; Parent 6 violates Max-Heap order; swapping them propagates the key upward in strictly <i>O</i>(log <i>N</i>) time.</li>
-    </ul>
+  <!-- BIG PLAYFUL PULL QUOTE -->
+  <div class="pull-quote-card">
+    <span class="pull-quote-mark">&ldquo;</span>
+    <div class="pull-quote-text">
+      A binary heap is an array pretending to be a tree. By forbidding internal gaps, physical pointer traversal transforms into trivial bit-shifts.
+    </div>
+    <div class="pull-quote-author">&mdash; The Architecture of Heaps</div>
   </div>
 </div>
 
-<div class="page-footer">
-  <span>COMP20003 DK Study Companion · Krahets Authentic Diagram Integration</span>
-  <span>Topic 4.2 · Page 1 of 2</span>
+<!-- HERO GRAPHIC SHOWCASE -->
+<div class="hero-graphic-card">
+  <div class="hero-graphic-badge">Figure 4.2.1 · Spatial Architecture & Memory Mapping</div>
+  <div class="hero-graphic-grid">
+    <div class="hero-img-box">
+      <img src="./assets/images/04_binary_heap_representation.png" alt="Binary Heap Representation"/>
+    </div>
+    <div class="look-closer-box">
+      <div class="look-closer-title">🔍 LOOK CLOSER: 3 MECHANICAL SECRETS</div>
+      
+      <div class="step-point">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <b>The "No-Gaps" Shape Law</b>: Every level is packed strictly left-to-right. This mathematical constraint ensures elements fill array slots 0 to <i>N</i> - 1 without leaving a single empty hole.
+        </div>
+      </div>
+
+      <div class="step-point">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <b>Zero-Cost Coordinate Math</b>: Notice the curved grey leader lines! To jump to your parent, simply calculate &lfloor;(<i>i</i> - 1) / 2&rfloor;. To jump to your children: 2<i>i</i> + 1 and 2<i>i</i> + 2.
+        </div>
+      </div>
+
+      <div class="step-point">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <b>The Sovereign Root</b>: In a Max-Heap, every parent is &ge; both children. By induction, the overall maximum is guaranteed to sit right at index 0, readable in instantaneous <i>O</i>(1) time.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Comparison Box: Why Dynamic Trees Fail -->
+<div class="grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 4px;">
+  <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 6px 8px;">
+    <b style="color: #64748B; font-size: 7.6pt; text-transform: uppercase;">⚠️ Pointer-Based Trees (Memory Hog)</b>
+    <p style="font-size: 8pt; color: #475569; margin: 2px 0 0 0;">Each node demands two 8-byte pointer addresses (`*left`, `*right`). Memory blocks are scattered across RAM, thrashing CPU cache lines.</p>
+  </div>
+  <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 4px; padding: 6px 8px;">
+    <b style="color: #0284C7; font-size: 7.6pt; text-transform: uppercase;">✨ Contiguous Array Heap (Cache Heaven)</b>
+    <p style="font-size: 8pt; color: #1E3A8A; margin: 2px 0 0 0;">Zero bytes wasted on pointers. Sequential memory layout triggers hardware pre-fetching, executing operations at raw CPU speed.</p>
+  </div>
+</div>
+
+<div class="dk-footer">
+  <span>DK Study Companion · COMP20003 Algorithms & Data Structures</span>
+  <span><b>Topic 4.2 · Page 1 of 2</b></span>
 </div>
 
 <!-- ================= PAGE 2 ================= -->
 <div class="page-break"></div>
 
-<div class="doc-header">
-  <div class="doc-title-group">
-    <div class="subtitle">COMP20003 Algorithms & Data Structures · DK Study Companion</div>
-    <h1>Topic 4.2 · Exam Combat, Trace Protocol & Traps</h1>
+<div class="running-header">
+  <span class="series-tag">DK Study Companion · Algorithms & Data Structures</span>
+  <span class="chapter-tag">Topic 4.2 · The Combat Arena</span>
+</div>
+
+<div class="infographic-banner">
+  <span>HOW IT WORKS · The Up-Heap Elevator</span>
+  <span class="badge">Operation: Insert (Push)</span>
+</div>
+
+<!-- Up-Heap Step-by-Step Diagram Card -->
+<div class="step-diagram-card">
+  <div class="step-diagram-grid">
+    <div style="text-align: center; background: #FAFAFA; border: 1px solid #F1F5F9; border-radius: 6px; padding: 4px;">
+      <img src="./assets/images/04_heap_push_upheap.png" alt="Up-Heap Step" style="max-width: 100%; height: auto; display: block; margin: 0 auto;"/>
+    </div>
+    <div>
+      <div style="font-size: 8.6pt; font-weight: 800; color: #0F172A; margin-bottom: 5px;">THE 3-BEAT ELEVATOR PROTOCOL</div>
+      
+      <div class="step-point">
+        <div class="step-num">A</div>
+        <div class="step-content">
+          <b>Tail Append</b>: New key 7 lands at the bottom frontier (index 11). Structural completeness is 100% satisfied.
+        </div>
+      </div>
+
+      <div class="step-point">
+        <div class="step-num">B</div>
+        <div class="step-content">
+          <b>Ancestor Tube Isolation</b>: Look at the shaded grey tube! The algorithm ONLY inspects direct parents along the root line. Unrelated subtrees are completely untouched.
+        </div>
+      </div>
+
+      <div class="step-point">
+        <div class="step-num">C</div>
+        <div class="step-content">
+          <b>Logarithmic Ceiling</b>: Because tree height is strictly &lfloor;log<sub>2</sub> <i>N</i>&rfloor;, the bubble-up performs at most 3 swaps before reaching harmony in <i>O</i>(log <i>N</i>) time.
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="header-badge">Combat Anatomy: [02] [03] [04]</div>
 </div>
 
-<!-- [02] COMPUTATIONAL THINKING -->
-<div class="section-title"><span class="num">02</span> English Computational Thinking & Answer Templates</div>
-
-<div class="template-box">
-  <div class="template-label">Template 1 · Invariant Preservation Causal Chain (Insert / Up-Heap)</div>
-  <p>Inserting element <i>X</i> appends it to index <i>N</i>, strictly preserving the <span class="highlight-term">Structural Completeness Invariant</span>.</p>
-  <p>Because <i>X</i> may exceed its parent at index &lfloor;(<i>i</i> - 1) / 2&rfloor;, the <span class="highlight-term">Heap-Order Invariant</span> may be locally violated.</p>
-  <p>The algorithm iteratively swaps <i>X</i> with its parent along the <span class="highlight-term">ancestor path</span> until <i>A</i>[parent] &ge; <i>X</i> or root is reached.</p>
+<!-- Computational Thinking Templates -->
+<div class="combat-card">
+  <div class="combat-header">🎯 EXAMINER SCORING TEMPLATES (Full-Mark English Causal Chains)</div>
+  <div class="combat-template">
+    <b>Invariant Preservation</b>: Inserting <i>X</i> appends it to index <i>N</i>, preserving the <span class="pill">Structural Completeness Invariant</span>. If <i>X</i> violates the <span class="pill">Heap-Order Invariant</span>, it bubbles upward along its unique <span class="pill">ancestor path</span> until order is restored.
+  </div>
+  <div class="combat-template">
+    <b>Time Complexity Proof</b>: A complete binary tree of <i>N</i> keys has height strictly <i>h</i> = &lfloor;log<sub>2</sub> <i>N</i>&rfloor;. Because up-heap tests exactly 1 comparison per ancestor level, worst-case execution is strictly <span class="pill">O(log N)</span>.
+  </div>
 </div>
 
-<div class="template-box">
-  <div class="template-label">Template 2 · Logarithmic Time Complexity Justification</div>
-  <p>The maximum number of comparisons and swaps is bounded by tree height <i>h</i> = &lfloor;log<sub>2</sub> <i>N</i>&rfloor;.</p>
-  <p>Because each ancestor level performs exactly one comparison, insertion executes in strictly <span class="highlight-term">O(log N) worst-case time</span>.</p>
-</div>
-
-<!-- [03] STATE MATRIX / TRACE PROTOCOL -->
-<div class="section-title"><span class="num">03</span> Mechanics of the State Matrix / Trace Protocol</div>
-
-<p style="font-size: 8pt; color: #475569; margin-bottom: 5px;">
-  <span class="axiom-badge">AXIOM 1</span> <b>0-Based vs 1-Based</b>: Always verify whether the exam defines index 0 or index 1 as root.
-  &nbsp;|&nbsp;
-  <span class="axiom-badge">AXIOM 2</span> <b>Single Comparison</b>: Up-heap compares ONLY against parent (1 test/level); down-heap requires 2 tests/level.
-</p>
-
-<table class="matrix-table">
+<!-- State Matrix Execution Trace -->
+<div style="font-size: 8.2pt; font-weight: 800; color: #0F172A; margin-bottom: 4px;">⚡ EXECUTION LOG: STATE MATRIX TRACE (Push Key 7)</div>
+<table class="dk-table">
   <thead>
     <tr>
-      <th style="width: 8%;">Step</th>
-      <th style="width: 14%;">Active Index <i>i</i></th>
-      <th style="width: 20%;">Parent &lfloor;(<i>i</i>-1)/2&rfloor;</th>
-      <th style="width: 13%;">Val at <i>i</i></th>
-      <th style="width: 13%;">Val at Parent</th>
-      <th style="width: 18%;">Invariant Check</th>
-      <th style="width: 14%;">State Transition</th>
+      <th style="width: 10%;">Step</th>
+      <th style="width: 16%;">Active Node <i>i</i></th>
+      <th style="width: 22%;">Parent &lfloor;(<i>i</i>-1)/2&rfloor;</th>
+      <th style="width: 14%;">Values</th>
+      <th style="width: 22%;">Condition Check</th>
+      <th style="width: 16%;">Action Taken</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="mono">0</td>
       <td class="mono">11 (Tail)</td>
-      <td class="mono">floor(10/2) = 5</td>
-      <td class="mono">7</td>
-      <td class="mono">6</td>
+      <td class="mono">&lfloor;10 / 2&rfloor; = 5</td>
+      <td class="mono">A[11]=7, A[5]=6</td>
       <td class="violation">7 &gt; 6 (Violation)</td>
       <td>Swap A[11] &harr; A[5]; <i>i</i> &larr; 5</td>
     </tr>
     <tr>
       <td class="mono">1</td>
       <td class="mono">5</td>
-      <td class="mono">floor(4/2) = 2</td>
-      <td class="mono">7</td>
-      <td class="mono">7</td>
-      <td class="valid">7 &le; 7 (Satisfied)</td>
+      <td class="mono">&lfloor;4 / 2&rfloor; = 2</td>
+      <td class="mono">A[5]=7, A[2]=7</td>
+      <td class="valid">7 &le; 7 (Harmonized)</td>
       <td><b>Halt</b> (Restored)</td>
     </tr>
   </tbody>
 </table>
 
-<!-- [04] LETHAL EXAM TRAPS -->
-<div class="section-title"><span class="num">04</span> Lethal Exam Traps & Answer Optimization Matrix</div>
-
-<table class="trap-table">
-  <thead>
-    <tr>
-      <th class="bad">❌ Vague Answer (0 ~ 1 Mark)</th>
-      <th class="good">✅ Full-Mark Criterion Answer (Full Marks)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="bad-cell">
-        <b>Q: Why is an array preferred over a linked list for binary heaps?</b><br/>
-        <i>"Arrays are faster and easier to implement in C."</i><br/>
-        <span style="font-size: 7.3pt; color: #991B1B;">[Examiner note: 0 Marks. Lacks mechanical cause: fails to contrast O(1) index arithmetic against O(N) traversal.]</span>
-      </td>
-      <td class="good-cell">
-        <b>Criterion Answer:</b><br/>
-        A complete binary tree in an array computes parent and child addresses in <b>O(1) arithmetic time</b> (&lfloor;(<i>i</i>-1)/2&rfloor;, 2<i>i</i>+1). A linked tree lacks random access, requiring <b>O(N) sequential traversal</b> to locate the insertion tail or parent, degrading insertion from <i>O</i>(log <i>N</i>) to <i>O</i>(<i>N</i>).
-      </td>
-    </tr>
-    <tr>
-      <td class="bad-cell">
-        <b>Q: What is the maximum number of comparisons to insert into a heap of size N?</b><br/>
-        <i>"Approximately log N comparisons."</i><br/>
-        <span style="font-size: 7.3pt; color: #991B1B;">[Examiner note: Inexact boundary. Does not credit full floor formula.]</span>
-      </td>
-      <td class="good-cell">
-        <b>Criterion Answer:</b><br/>
-        At most <b>&lfloor;log<sub>2</sub> <i>N</i>&rfloor; comparisons</b>, because up-heap traverses a single ancestor path performing exactly 1 comparison per level.
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="card" style="border-left: 3.5px solid #DC2626; background: #FFFDFD; margin-top: 5px;">
-  <div style="font-weight: 700; color: #DC2626; font-size: 8pt; margin-bottom: 2px;">⚠️ CRITICAL EXAM PITFALL: 0-BASED VS 1-BASED INDEX SHIFT</div>
-  <p style="font-size: 7.9pt; margin: 0; color: #7F1D1D;">
-    Check the root index immediately! In <b>0-based arrays</b> (Figure 4.2.1 above), Parent = &lfloor;(<i>i</i> - 1) / 2&rfloor;.
-    In <b>1-based arrays</b>, Parent = &lfloor;<i>i</i> / 2&rfloor;.
-    Mixing up the two formulas is the #1 reason students lose 100% of tracing marks in COMP20003 exams.
-  </p>
+<!-- Examiner Contrast Matrix -->
+<div class="exam-contrast-grid">
+  <div class="contrast-card fail">
+    <div class="contrast-title">❌ 0-Mark Vague Answer</div>
+    <b>"Why choose an array over a linked list?"</b><br/>
+    <i>"Arrays are faster, simpler, and use less memory in C."</i><br/>
+    <span style="font-size: 7.2pt; color: #991B1B;">[Examiner: 0 Marks. Fails to identify the mechanical trade-off: O(1) index math vs O(N) linear search.]</span>
+  </div>
+  <div class="contrast-card pass">
+    <div class="contrast-title">✅ Full-Mark Criterion Answer</div>
+    <b>"Why choose an array over a linked list?"</b><br/>
+    An array computes parent & child addresses in <b>O(1) arithmetic time</b> (&lfloor;(<i>i</i>-1)/2&rfloor;, 2<i>i</i>+1). A linked list lacks random access, requiring <b>O(N) traversal</b> to find the insertion point, ruining <i>O</i>(log <i>N</i>) efficiency.
+  </div>
 </div>
 
-<div class="page-footer">
-  <span>COMP20003 DK Study Companion · Krahets Authentic Diagram Integration</span>
-  <span>Topic 4.2 · Page 2 of 2</span>
+<!-- "DID YOU KNOW?" Fun Callout Card -->
+<div class="did-you-know-card">
+  <div class="did-you-know-badge">💡 EXAM TRAP</div>
+  <div class="did-you-know-text">
+    <b>The Root Index Trap</b>: In <b>0-based arrays</b> (like the figure above), parent is &lfloor;(<i>i</i> - 1) / 2&rfloor;. In <b>1-based arrays</b>, parent is &lfloor;<i>i</i> / 2&rfloor;. Confusing the two causes off-by-one errors that wipe out 100% of tracing marks!
+  </div>
+</div>
+
+<div class="dk-footer">
+  <span>DK Study Companion · COMP20003 Algorithms & Data Structures</span>
+  <span><b>Topic 4.2 · Page 2 of 2</b></span>
 </div>
 
 </body>

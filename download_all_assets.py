@@ -54,3 +54,4 @@ for filename, rel_path in assets.items():
         print(f"  [FAIL] {filename}: {e}")
 
 print("Batch download complete!")
+
