@@ -38,3 +38,4 @@ if __name__ == "__main__":
             print(f"Result for {q}: {img}")
         except Exception as e:
             print(f"Error on {q}: {e}")
+
