@@ -1,0 +1,1 @@
+./dict2 stage tests/dataset_1.csv output.out < tests/test1.in > output.stdout.out
