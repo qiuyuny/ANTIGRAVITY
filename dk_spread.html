@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <title>DK Study Companion - The Binary Heap</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
   @page {
     size: 420mm 297mm landscape;
-    margin: 10mm 14mm 10mm 14mm;
+    margin: 7mm 12mm 6mm 12mm;
   }
 
   * {
@@ -17,25 +17,33 @@
     print-color-adjust: exact;
   }
 
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+
   body {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     color: #1E293B;
     background: #FFFFFF;
     margin: 0;
     padding: 0;
-    font-size: 8.8pt;
-    line-height: 1.42;
+    font-size: 8.2pt;
+    line-height: 1.36;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
-  /* Top Running Header Rule (DK Book Style) */
+  /* Running Header */
   .running-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1.2px solid #94A3B8;
-    padding-bottom: 5px;
-    margin-bottom: 14px;
-    font-size: 7.8pt;
+    border-bottom: 1.5px solid #0F172A;
+    padding-bottom: 3px;
+    margin-bottom: 6px;
+    font-size: 7.2pt;
     font-weight: 700;
     letter-spacing: 0.08em;
     color: #64748B;
@@ -47,309 +55,410 @@
   /* 2-Page Spread Layout */
   .spread-container {
     display: grid;
-    grid-template-columns: 49% 49%;
-    column-gap: 2%;
+    grid-template-columns: 49.3% 49.3%;
+    column-gap: 1.4%;
     position: relative;
+    flex: 1;
   }
 
-  /* Center Book Crease Guide (Subtle) */
+  /* Center Fold Line */
   .spread-container::after {
     content: "";
     position: absolute;
-    top: -5px;
-    bottom: -5px;
+    top: -2px;
+    bottom: -2px;
     left: 50%;
     width: 1px;
-    background: linear-gradient(to bottom, rgba(226,232,240,0.2), rgba(203,213,225,0.6), rgba(226,232,240,0.2));
+    background: linear-gradient(to bottom, rgba(226,232,240,0.1), rgba(203,213,225,0.4), rgba(226,232,240,0.1));
   }
 
-  /* Left Page & Right Page Columns */
-  .page-left {
-    padding-right: 12px;
-  }
-  .page-right {
-    padding-left: 12px;
-  }
+  .page-left { padding-right: 8px; display: flex; flex-direction: column; justify-content: space-between; }
+  .page-right { padding-left: 8px; display: flex; flex-direction: column; justify-content: space-between; }
 
-  /* Big DK Display Title (Ultra-Light Sans + Strong Lead) */
-  .title-block {
-    margin-bottom: 10px;
+  /* Title & Exam Stamp Row */
+  .title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 4px;
   }
   .title-block h1 {
-    font-size: 36pt;
+    font-size: 27pt;
     font-weight: 300;
     letter-spacing: -0.03em;
     color: #0F172A;
-    margin: 0 0 4px 0;
+    margin: 0;
     line-height: 1.05;
   }
-  .title-block h1 b {
-    font-weight: 800;
+  .title-block h1 b { font-weight: 800; color: #0284C7; }
+  .title-block .subtitle {
+    font-size: 8.4pt;
+    font-weight: 600;
+    color: #64748B;
+    margin-top: 1px;
   }
 
-  /* 2-Column Intro Paragraphs */
+  /* Red Ink Architectural Exam Stamp */
+  .exam-stamp {
+    border: 2px dashed #DC2626;
+    border-radius: 5px;
+    padding: 3px 7px;
+    text-align: center;
+    transform: rotate(1.5deg);
+    background: #FEF2F2;
+    box-shadow: 0 2px 5px rgba(220,38,38,0.12);
+    flex-shrink: 0;
+  }
+  .exam-stamp-badge {
+    font-size: 7.8pt;
+    font-weight: 800;
+    color: #DC2626;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    display: block;
+    line-height: 1.2;
+  }
+  .exam-stamp-sub {
+    font-size: 6.4pt;
+    font-weight: 700;
+    color: #991B1B;
+    letter-spacing: 0.04em;
+    display: block;
+  }
+
+  /* 2-Column Narrative Intro */
   .intro-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin-bottom: 8px;
-    font-size: 8.6pt;
-    line-height: 1.45;
+    gap: 10px;
+    margin-bottom: 3px;
+    font-size: 7.9pt;
+    line-height: 1.36;
     color: #334155;
   }
 
-  /* Decorative Wavy Flourish (Iconic DK element) */
-  .flourish-wrap {
-    text-align: center;
-    margin: 4px 0 12px 0;
-  }
-  .flourish-wrap svg {
-    display: inline-block;
-  }
+  /* Wavy Divider */
+  .flourish-wrap { text-align: center; margin: 1px 0 4px 0; }
 
-  /* Section Headings */
+  /* Sub-Topic Headings */
   .topic-heading {
-    font-size: 11pt;
-    font-weight: 700;
+    font-size: 9.4pt;
+    font-weight: 800;
     color: #0F172A;
-    margin: 0 0 3px 0;
+    margin: 0 0 1px 0;
     letter-spacing: -0.01em;
   }
   .topic-subtext {
-    font-size: 8pt;
-    color: #475569;
-    line-height: 1.38;
-    margin-bottom: 8px;
+    font-size: 7.3pt;
+    color: #64748B;
+    line-height: 1.25;
+    margin-bottom: 4px;
   }
 
-  /* DK Circular Vignettes (Magnification / Texture style) */
+  /* MEME / METAPHOR INFOGRAPHIC: Irasutoya Integrated */
+  .metaphor-card {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    padding: 5px 8px;
+    margin-bottom: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .metaphor-box {
+    background: #FFFFFF;
+    border-radius: 5px;
+    padding: 5px 7px;
+    border: 1px solid #E2E8F0;
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    gap: 7px;
+    align-items: center;
+  }
+  .metaphor-box.bad { border-top: 3px solid #EF4444; }
+  .metaphor-box.good { border-top: 3px solid #0284C7; }
+  .metaphor-img-wrap {
+    text-align: center;
+  }
+  .metaphor-img-wrap img {
+    max-width: 54px;
+    max-height: 54px;
+    display: block;
+    margin: 0 auto;
+  }
+  .metaphor-text {
+    font-size: 7.1pt;
+    line-height: 1.25;
+    color: #334155;
+  }
+  .metaphor-title {
+    font-size: 7.4pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 1px;
+  }
+  .metaphor-title.bad { color: #DC2626; }
+  .metaphor-title.good { color: #0284C7; }
+
+  /* Circular Vignettes (DK Puffin Style) */
   .vignette-gallery {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin: 12px 0 16px 0;
+    gap: 7px;
+    margin: 4px 0 5px 0;
   }
-  .vignette-item {
-    text-align: center;
-    position: relative;
-  }
+  .vignette-item { text-align: center; position: relative; }
   .circle-crop {
-    width: 90px;
-    height: 90px;
+    width: 62px;
+    height: 62px;
     border-radius: 50%;
-    margin: 0 auto 6px auto;
+    margin: 0 auto 3px auto;
     overflow: hidden;
-    border: 2.5px solid #FFFFFF;
-    box-shadow: 0 4px 10px rgba(15,23,42,0.12);
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 2px 6px rgba(15,23,42,0.10);
     position: relative;
     background: #F1F5F9;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .circle-crop img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  .circle-crop.sweet { border-color: #0284C7; box-shadow: 0 3px 8px rgba(2,132,199,0.20); }
   .vignette-badge {
     position: absolute;
     bottom: 2px;
-    right: 18px;
+    right: 10px;
     background: #0F172A;
     color: #FFFFFF;
-    font-size: 7.5pt;
+    font-size: 6.5pt;
     font-weight: 800;
-    padding: 1px 5px;
-    border-radius: 10px;
-    border: 1.5px solid #FFFFFF;
+    padding: 1px 4px;
+    border-radius: 8px;
+    border: 1px solid #FFFFFF;
   }
-  .vignette-badge.highlight {
-    background: #0284C7;
-  }
-  .vignette-label {
-    font-size: 8.5pt;
-    font-weight: 700;
-    color: #0F172A;
-    margin-bottom: 2px;
-  }
-  .vignette-desc {
-    font-size: 7.4pt;
-    color: #64748B;
-    line-height: 1.3;
-  }
+  .vignette-badge.highlight { background: #0284C7; }
+  .vignette-label { font-size: 7.7pt; font-weight: 700; color: #0F172A; margin-bottom: 1px; }
+  .vignette-desc { font-size: 6.8pt; color: #64748B; line-height: 1.20; }
 
-  /* Organic Speech Bubble (Handwritten Callout - DK Signature) */
+  /* Speech Bubble (Caveat Handwriting) */
   .speech-bubble {
     background: #FFFFFF;
-    border: 1.5px solid #CBD5E1;
-    border-radius: 120px / 70px;
-    padding: 14px 22px;
+    border: 1.2px solid #CBD5E1;
+    border-radius: 80px / 45px;
+    padding: 5px 14px;
     text-align: center;
     position: relative;
-    box-shadow: 0 6px 14px rgba(15,23,42,0.06);
-    margin: 12px auto;
-    max-width: 90%;
+    box-shadow: 0 3px 8px rgba(15,23,42,0.04);
+    margin: 4px auto;
+    max-width: 95%;
   }
   .speech-bubble::before {
     content: "";
     position: absolute;
-    bottom: -10px;
-    left: 45%;
-    width: 18px;
-    height: 10px;
+    bottom: -6px;
+    left: 48%;
+    width: 12px;
+    height: 6px;
     background: #FFFFFF;
     clip-path: polygon(0 0, 100% 0, 50% 100%);
-    border-left: 1.5px solid #CBD5E1;
-    border-right: 1.5px solid #CBD5E1;
+    border-left: 1.2px solid #CBD5E1;
+    border-right: 1.2px solid #CBD5E1;
   }
   .speech-text {
     font-family: 'Caveat', cursive;
-    font-size: 13.5pt;
+    font-size: 11.5pt;
     font-weight: 600;
-    color: #1E293B;
-    line-height: 1.25;
+    color: #0F172A;
+    line-height: 1.15;
   }
 
-  /* Right Page: Hero Cutaway & Historical Timeline */
+  /* Washi Tape Sticky Note */
+  .sticky-note {
+    background: #FEF9C3;
+    border: 1px solid #FDE047;
+    border-radius: 3px;
+    padding: 5px 8px;
+    position: relative;
+    box-shadow: 1px 3px 6px rgba(0,0,0,0.05);
+    margin: 4px 0;
+  }
+  .sticky-note.green {
+    background: #DCFCE7;
+    border-color: #86EFAC;
+  }
+  .sticky-tape {
+    position: absolute;
+    top: -4px;
+    left: 42%;
+    width: 36px;
+    height: 8px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+  .sticky-title {
+    font-size: 7.2pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+  }
+  .sticky-note .sticky-title { color: #854D0E; }
+  .sticky-note.green .sticky-title { color: #166534; }
+  .sticky-content {
+    font-size: 7.1pt;
+    line-height: 1.25;
+    color: #334155;
+  }
+
+  /* Right Page: Hero Cutaway */
   .hero-cutaway-container {
     position: relative;
     text-align: center;
-    margin-bottom: 12px;
-    padding: 10px;
+    margin-bottom: 6px;
+    padding: 4px;
     background: #FAFAFA;
-    border-radius: 8px;
+    border-radius: 5px;
+    border: 1px solid #F1F5F9;
   }
   .hero-cutaway-container img {
-    max-width: 92%;
+    max-width: 82%;
     height: auto;
     display: block;
     margin: 0 auto;
-    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.06));
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.04));
   }
 
-  /* Hairline Leader Annotations */
-  .pointer-annotation {
-    font-size: 7.2pt;
-    color: #475569;
-    font-style: italic;
-    line-height: 1.25;
-  }
-
-  /* Timeline Ladder (Japonisme / Key Dates Style) */
+  /* Timeline Ladder */
   .timeline-box {
     border-left: 2px solid #0284C7;
-    padding-left: 12px;
-    margin: 8px 0;
+    padding-left: 8px;
+    margin: 2px 0;
   }
   .timeline-title {
-    font-size: 8.5pt;
+    font-size: 7.5pt;
     font-weight: 800;
     color: #0284C7;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    margin-bottom: 6px;
+    margin-bottom: 3px;
   }
-  .timeline-entry {
-    margin-bottom: 6px;
-    position: relative;
-  }
+  .timeline-entry { margin-bottom: 3px; position: relative; }
   .timeline-entry::before {
     content: "";
     position: absolute;
-    left: -17px;
+    left: -13px;
     top: 3px;
-    width: 8px;
-    height: 8px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
     background: #FFFFFF;
-    border: 2px solid #0284C7;
+    border: 1.8px solid #0284C7;
   }
-  .timeline-date {
-    font-weight: 800;
-    font-size: 7.8pt;
-    color: #0F172A;
-  }
-  .timeline-desc {
-    font-size: 7.5pt;
-    color: #475569;
-    line-height: 1.3;
-  }
+  .timeline-date { font-weight: 800; font-size: 7.2pt; color: #0F172A; }
+  .timeline-desc { font-size: 6.9pt; color: #475569; line-height: 1.20; }
 
   /* Bottom Running Footer */
   .running-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1.2px solid #94A3B8;
-    padding-top: 5px;
-    margin-top: 14px;
-    font-size: 7.8pt;
+    border-top: 1.5px solid #0F172A;
+    padding-top: 3px;
+    margin-top: 4px;
+    font-size: 7.2pt;
     font-weight: 700;
     color: #64748B;
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
-  .running-bottom .page-num {
-    color: #0F172A;
-    font-weight: 800;
-    margin-right: 6px;
-  }
+  .running-bottom .page-num { color: #0F172A; font-weight: 800; margin-right: 4px; }
 </style>
 </head>
 <body>
 
 <!-- TOP RUNNING HEADER -->
 <div class="running-top">
-  <div class="left-tag"><b>076</b> | DATA STRUCTURES & ALGORITHMS</div>
-  <div class="right-tag">PRIORITY QUEUES & HEAPS | <b>077</b></div>
+  <div class="left-tag"><b>076</b> | DATA STRUCTURES & ALGORITHMS &nbsp;·&nbsp; MODULE 4</div>
+  <div class="right-tag">TOPIC 4.2 · THE BINARY HEAP &nbsp;|&nbsp; <b>077</b></div>
 </div>
 
-<!-- SPREAD CONTAINER: 2 FACING PAGES -->
+<!-- SPREAD CONTAINER -->
 <div class="spread-container">
 
   <!-- ================= LEFT PAGE (p. 76) ================= -->
   <div class="page-left">
     
-    <!-- Big Title -->
-    <div class="title-block">
-      <h1>The <b>binary heap</b></h1>
+    <!-- Title & Exam Stamp Row -->
+    <div class="title-row">
+      <div class="title-block">
+        <h1>The <b>binary heap</b></h1>
+        <div class="subtitle">An array in disguise · How contiguous memory mimics a lightning tree</div>
+      </div>
+      
+      <!-- Vintage Architectural Exam Stamp -->
+      <div class="exam-stamp">
+        <span class="exam-stamp-badge">[!!!] CORE MUST-KNOW</span>
+        <span class="exam-stamp-sub">COMP20003 IN-SCOPE · 15-20 MARKS</span>
+      </div>
     </div>
 
     <!-- 2-Column Narrative Intro -->
     <div class="intro-grid">
       <div>
-        A priority queue is one of computing's most vital inventions: an abstract data structure where every entry carries an urgency rank, ensuring the most pressing task is always served first. Unlike a simple first-in, first-out line, priority queues dynamically reorder incoming work.
+        A priority queue is one of computing's greatest triumphs: an abstract data type where urgent jobs float instantly to the top, like air bubbles through water. From emergency room triage to CPU interrupt scheduling, the highest priority task always commands attention.
       </div>
       <div>
-        Implementing this concept efficiently, however, posed a profound dilemma. Storing items in an unsorted list allows instantaneous insertions but makes locating the minimum a tedious chore. Keeping the list sorted reverses the problem: extraction is instant, but insertion grinds to a halt.
+        Yet storing this hierarchy posed a physical crisis. Plain unsorted lists allow instant insertions but turn finding the minimum into an agonizing linear scan. Fully sorted lists allow instant extraction, but every single insertion triggers a brutal domino shift.
       </div>
     </div>
 
-    <!-- Wavy Decorative Flourish -->
+    <!-- Decorative Wavy Flourish -->
     <div class="flourish-wrap">
-      <svg width="120" height="8" viewBox="0 0 120 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M 0 4 Q 15 0, 30 4 T 60 4 T 90 4 T 120 4" stroke="#94A3B8" stroke-width="1.2" fill="none"/>
+      <svg width="100" height="6" viewBox="0 0 100 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 0 3 Q 12.5 0, 25 3 T 50 3 T 75 3 T 100 3" stroke="#94A3B8" stroke-width="1.2" fill="none"/>
       </svg>
     </div>
 
-    <!-- Sub-Topic: Tradeoff Comparison -->
-    <div class="topic-heading">The Priority Dilemma</div>
-    <div class="topic-subtext">
-      Comparing the mechanical compromises of traditional array designs against the binary heap sweet spot.
+    <!-- METAPHOR INFOGRAPHIC: Authentic Irasutoya Cutouts -->
+    <div class="metaphor-card">
+      <!-- Left: Crowded Train (Sorted Array) -->
+      <div class="metaphor-box bad">
+        <div class="metaphor-img-wrap">
+          <img src="./assets/irasutoya/crowded_train.png" alt="Crowded Commuter Train"/>
+        </div>
+        <div class="metaphor-text">
+          <div class="metaphor-title bad">The Commuter Jam (Sorted Array)</div>
+          Squeezing a key into a sorted array is like pushing onto a packed morning commuter train. Every single person behind must shuffle right: <b><i>O</i>(<i>N</i>) bottleneck!</b>
+        </div>
+      </div>
+
+      <!-- Right: Lion King (Binary Heap) -->
+      <div class="metaphor-box good">
+        <div class="metaphor-img-wrap">
+          <img src="./assets/irasutoya/crown.png" alt="Lion King with Crown"/>
+        </div>
+        <div class="metaphor-text">
+          <div class="metaphor-title good">The Royal Elevator (Binary Heap)</div>
+          The Root is King (global maximum at index 0 in <b><i>O</i>(1)</b> time). Subordinate nodes only need to beat their direct parent, bubbling upward in <b><i>O</i>(log <i>N</i>)</b> speed!
+        </div>
+      </div>
     </div>
 
-    <!-- Circular Vignette Gallery (DK Puffin / Texture Style!) -->
+    <!-- The 3 Circular Vignettes (DK Puffin Style) -->
+    <div class="topic-heading">The Three Architectural Philosophies</div>
+    <div class="topic-subtext">Comparing how different physical memory layouts handle the priority dilemma.</div>
+
     <div class="vignette-gallery">
       <!-- Vignette 1 -->
       <div class="vignette-item">
         <div class="circle-crop">
-          <svg width="60" height="60" viewBox="0 0 60 60">
-            <rect x="5" y="20" width="10" height="20" fill="#CBD5E1"/>
-            <rect x="18" y="10" width="10" height="30" fill="#94A3B8"/>
-            <rect x="31" y="25" width="10" height="15" fill="#64748B"/>
-            <rect x="44" y="5" width="10" height="35" fill="#475569"/>
-            <path d="M 5 50 L 55 50" stroke="#DC2626" stroke-width="2"/>
+          <svg width="50" height="50" viewBox="0 0 50 50">
+            <rect x="4" y="16" width="7" height="20" fill="#CBD5E1"/>
+            <rect x="15" y="8" width="7" height="28" fill="#94A3B8"/>
+            <rect x="26" y="22" width="7" height="14" fill="#64748B"/>
+            <rect x="37" y="5" width="7" height="31" fill="#475569"/>
+            <path d="M 4 41 L 46 41" stroke="#DC2626" stroke-width="1.5"/>
           </svg>
           <div class="vignette-badge">x1</div>
         </div>
@@ -360,12 +469,12 @@
       <!-- Vignette 2 -->
       <div class="vignette-item">
         <div class="circle-crop">
-          <svg width="60" height="60" viewBox="0 0 60 60">
-            <rect x="5" y="32" width="10" height="8" fill="#94A3B8"/>
-            <rect x="18" y="24" width="10" height="16" fill="#94A3B8"/>
-            <rect x="31" y="16" width="10" height="24" fill="#94A3B8"/>
-            <rect x="44" y="8" width="10" height="32" fill="#94A3B8"/>
-            <path d="M 5 50 L 55 50" stroke="#DC2626" stroke-width="2"/>
+          <svg width="50" height="50" viewBox="0 0 50 50">
+            <rect x="4" y="26" width="7" height="10" fill="#94A3B8"/>
+            <rect x="15" y="19" width="7" height="17" fill="#94A3B8"/>
+            <rect x="26" y="12" width="7" height="24" fill="#94A3B8"/>
+            <rect x="37" y="5" width="7" height="31" fill="#94A3B8"/>
+            <path d="M 4 41 L 46 41" stroke="#DC2626" stroke-width="1.5"/>
           </svg>
           <div class="vignette-badge">x2</div>
         </div>
@@ -375,13 +484,13 @@
 
       <!-- Vignette 3: The Sweet Spot -->
       <div class="vignette-item">
-        <div class="circle-crop" style="border-color: #0284C7;">
-          <svg width="60" height="60" viewBox="0 0 60 60">
-            <circle cx="30" cy="14" r="7" fill="#0284C7"/>
-            <circle cx="16" cy="34" r="6" fill="#38BDF8"/>
-            <circle cx="44" cy="34" r="6" fill="#38BDF8"/>
-            <line x1="30" y1="14" x2="16" y2="34" stroke="#0284C7" stroke-width="1.5"/>
-            <line x1="30" y1="14" x2="44" y2="34" stroke="#0284C7" stroke-width="1.5"/>
+        <div class="circle-crop sweet">
+          <svg width="50" height="50" viewBox="0 0 50 50">
+            <circle cx="25" cy="11" r="5.5" fill="#0284C7"/>
+            <circle cx="13" cy="28" r="4.5" fill="#38BDF8"/>
+            <circle cx="37" cy="28" r="4.5" fill="#38BDF8"/>
+            <line x1="25" y1="11" x2="13" y2="28" stroke="#0284C7" stroke-width="1.5"/>
+            <line x1="25" y1="11" x2="37" y2="28" stroke="#0284C7" stroke-width="1.5"/>
           </svg>
           <div class="vignette-badge highlight">x3</div>
         </div>
@@ -393,18 +502,18 @@
     <!-- Organic Handwritten Speech Bubble -->
     <div class="speech-bubble">
       <div class="speech-text">
-        "Some designs place the root at index 0, shifting child math to 2i + 1 and 2i + 2. Always verify the root index before tracing!"
+        "Some exam questions place the root at index 0, shifting child math to 2i + 1 and 2i + 2. Always verify the root index before tracing!"
       </div>
     </div>
 
-    <!-- Sub-Topic: The Mathematical Coordinates -->
-    <div class="topic-heading" style="margin-top: 14px;">The Complete Tree Coordinates</div>
-    <div class="intro-grid" style="font-size: 8pt;">
-      <div>
-        <b>Level-by-level packing</b>: Because the complete binary tree fills strictly left-to-right without missing branches, elements map seamlessly into array indices.
-      </div>
-      <div>
-        <b>Pointerless navigation</b>: Physical pointers are banished. Jumping between parent and children requires only integer multiplication and division.
+    <!-- Mint Green Sticky Note: 10-Second Exam Hack -->
+    <div class="sticky-note green">
+      <div class="sticky-tape"></div>
+      <div class="sticky-title">PRO-TIP · INSTANT LEAF FORMULA</div>
+      <div class="sticky-content">
+        When an exam asks: <i>"Which array indices hold leaves?"</i>, <b>NEVER</b> draw the tree!
+        In a 1-based heap of size <i>N</i>, leaves are ALWAYS at indices <b>&lfloor;<i>N</i> / 2&rfloor; + 1 to <i>N</i></b>.
+        Last internal node is always <b>&lfloor;<i>N</i> / 2&rfloor;</b>. That's a free 2 marks in 5 seconds!
       </div>
     </div>
 
@@ -413,64 +522,77 @@
   <!-- ================= RIGHT PAGE (p. 77) ================= -->
   <div class="page-right">
 
-    <!-- Top Hero Diagram: Cutaway of Logical vs Physical Array -->
+    <!-- Top Hero Cutaway Diagram: Representation of Heap -->
     <div class="hero-cutaway-container">
       <img src="./assets/images/04_binary_heap_representation.png" alt="Binary Heap Physical Representation"/>
-      <div style="font-size: 7.6pt; color: #64748B; margin-top: 6px;">
-        <b>Figure 1</b>: <i>The Dual Nature of the Heap</i> &mdash; A logically complete hierarchical tree folded cleanly into contiguous computer memory.
+      <div style="font-size: 7.2pt; color: #64748B; margin-top: 3px;">
+        <b>Figure 1 · The Dual Nature</b>: <i>A complete hierarchical tree folded seamlessly into contiguous computer memory via index arithmetic.</i>
       </div>
     </div>
 
-    <!-- 2-Column Split: Dynamic Insertion + Historical Timeline -->
-    <div style="display: grid; grid-template-columns: 58% 38%; gap: 14px; margin-top: 8px;">
+    <!-- Split: Mechanical Elevator Cutaway + Key Dates Ladder -->
+    <div style="display: grid; grid-template-columns: 57% 39%; gap: 11px; margin-top: 4px;">
       
       <!-- Left Column: Up-Heap Mechanical Cutaway -->
       <div>
         <div class="topic-heading">The Sift-Up Elevator</div>
         <div class="topic-subtext">
-          When a new key enters at the frontier, it bubbles upward along its private ancestor tube until order is restored.
+          When key 7 enters at the frontier, it bubbles upward along its private ancestor tube.
         </div>
         
-        <div style="text-align: center; background: #FAFAFA; border-radius: 6px; padding: 6px; margin-bottom: 6px;">
+        <div style="text-align: center; background: #FAFAFA; border-radius: 5px; padding: 4px; margin-bottom: 4px;">
           <img src="./assets/images/04_heap_push_upheap.png" alt="Sift-Up Animation" style="max-width: 95%; height: auto; display: block; margin: 0 auto;"/>
         </div>
 
-        <div style="font-size: 7.6pt; color: #475569; line-height: 1.35;">
-          <b>The Ancestor Tube</b>: Notice the grey shaded tube! Key 7 only competes against its direct bloodline. Unrelated subtrees remain completely undisturbed, guaranteeing logarithmic speed.
+        <div style="font-size: 7.2pt; color: #475569; line-height: 1.30;">
+          <b>The Ancestor Tube Isolation</b>: Look at the grey shaded tube! Key 7 only evaluates its direct vertical bloodline. Unrelated subtrees remain untouched, guaranteeing <i>O</i>(log <i>N</i>) speed.
         </div>
       </div>
 
-      <!-- Right Column: Timeline Ladder (Japonisme style) -->
+      <!-- Right Column: Timeline Ladder + Sticky Note -->
       <div>
         <div class="timeline-box">
           <div class="timeline-title">Key Milestones</div>
           
           <div class="timeline-entry">
             <div class="timeline-date">1964 · J.W.J. Williams</div>
-            <div class="timeline-desc">Invents the binary heap to deliver the world's first in-place <i>O</i>(<i>N</i> log <i>N</i>) HeapSort.</div>
+            <div class="timeline-desc">Invents the binary heap to deliver the first in-place <i>O</i>(<i>N</i> log <i>N</i>) HeapSort.</div>
           </div>
 
           <div class="timeline-entry">
             <div class="timeline-date">1964 · Robert W. Floyd</div>
-            <div class="timeline-desc">Discovers bottom-up heap construction, building heaps from raw arrays in linear <i>O</i>(<i>N</i>) time.</div>
+            <div class="timeline-desc">Proves bottom-up `MakeHeap` builds a heap from raw data in linear <b><i>O</i>(<i>N</i>)</b> time.</div>
           </div>
 
           <div class="timeline-entry">
             <div class="timeline-date">1975 · Graph Routing</div>
-            <div class="timeline-desc">Becomes the engine of Dijkstra's algorithm, powering network routing protocols worldwide.</div>
+            <div class="timeline-desc">Becomes the engine of Dijkstra's algorithm, powering network routing worldwide.</div>
           </div>
         </div>
 
-        <!-- Field Exam Card -->
-        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 6px 8px; margin-top: 10px;">
-          <b style="color: #0284C7; font-size: 7.4pt; text-transform: uppercase;">Examiner Criterion</b>
-          <p style="font-size: 7.5pt; color: #334155; margin: 2px 0 0 0; line-height: 1.3;">
-            Full marks require stating: <i>"Array index math replaces pointers, granting O(1) parent-child arithmetic access vs O(N) sequential search in linked lists."</i>
-          </p>
+        <!-- Yellow Sticky Note: Examiner's Trap Warning -->
+        <div class="sticky-note">
+          <div class="sticky-tape"></div>
+          <div class="sticky-title">EXAMINER NOTE · ASYMMETRY</div>
+          <div class="sticky-content">
+            <b>Up-heap</b> requires only <b>1 comparison</b> per level (against parent).<br/>
+            <b>Down-heap</b> requires <b>2 comparisons</b> per level (pick largest child first, THEN compare with parent)!
+          </div>
         </div>
 
       </div>
 
+    </div>
+
+    <!-- Examiner Scoring Formula Box -->
+    <div style="background: #EFF6FF; border: 1.5px solid #BFDBFE; border-radius: 5px; padding: 6px 9px; margin-top: 6px;">
+      <div style="font-size: 7.6pt; font-weight: 800; color: #0284C7; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px;">
+        EXAMINER FULL-MARK SCORING CRITERION
+      </div>
+      <p style="font-size: 7.3pt; color: #1E3A8A; margin: 0; line-height: 1.32;">
+        <b>Q: Why is an array preferred over a linked list for binary heaps?</b><br/>
+        <i>"A complete binary tree mapped to an array computes parent and child addresses in <b>O(1) arithmetic time</b> (&lfloor;(i-1)/2&rfloor;, 2i+1). A linked list lacks random access, requiring <b>O(N) sequential traversal</b> to find the insertion tail or parent, degrading insertion from O(log N) to O(N)."</i>
+      </p>
     </div>
 
   </div>
@@ -479,8 +601,8 @@
 
 <!-- BOTTOM RUNNING FOOTER -->
 <div class="running-bottom">
-  <div><span class="page-num">76</span> ABOUT PRIORITY QUEUES</div>
-  <div>CHOOSING A BINARY HEAP <span class="page-num">77</span></div>
+  <div><span class="page-num">76</span> COMP20003 STUDY COMPANION &nbsp;·&nbsp; ABOUT PRIORITY QUEUES</div>
+  <div>CHOOSING A BINARY HEAP &nbsp;·&nbsp; <span class="page-num">77</span></div>
 </div>
 
 </body>
